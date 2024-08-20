@@ -1,0 +1,64 @@
+@import "@/assets/styles/variables.scss";
+
+@mixin responsive-padding-x($px-mobile, $px-sm, $px-md, $px-lg) {
+  padding-left: $px-mobile;
+  padding-right: $px-mobile;
+
+  @media (min-width: 640px) {
+    // sm breakpoint
+    padding-left: $px-sm;
+    padding-right: $px-sm;
+  }
+
+  @media (min-width: 768px) {
+    // md breakpoint
+    padding-left: $px-md;
+    padding-right: $px-md;
+  }
+  @media (min-width: 1024px) {
+    // lg breakpoint
+    padding-left: $px-lg;
+    padding-right: $px-lg;
+  }
+}
+
+@mixin responsive-padding-y($py-mobile, $py-sm, $py-md, $py-lg) {
+  & {
+    padding-top: $py-mobile;
+    padding-bottom: $py-mobile;
+  }
+  @media (min-width: 640px) {
+    // sm breakpoint
+    padding-top: $py-sm;
+    padding-bottom: $py-sm;
+  }
+
+  @media (min-width: 768px) {
+    // md breakpoint
+    padding-top: $py-md;
+    padding-bottom: $py-md;
+  }
+  @media (min-width: 1024px) {
+    // lg breakpoint
+    padding-top: $py-lg;
+    padding-bottom: $py-lg;
+  }
+}
+
+@mixin responsive-margin-x($ml-mobile, $ml-sm, $ml-md, $ml-lg) {
+  margin-left: $ml-mobile;
+
+  @media (min-width: 640px) {
+    // sm breakpoint
+    margin-left: $ml-sm;
+  }
+
+  @media (min-width: 768px) {
+    // md breakpoint
+    margin-left: $ml-md;
+  }
+  @media (min-width: 1024px) {
+    // lg breakpoint
+    margin-left: $ml-lg;
+  }
+}

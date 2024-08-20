@@ -1,0 +1,123 @@
+@import "../../../styles/globalAuth.scss";
+
+.form {
+  grid-column: span 1 / span 1;
+  //   min-height: 100vh;
+  //   height: 100%;
+  background-color: white;
+  @include responsive-padding-x(32px, 86px, 57px, 114px);
+  @include responsive-padding-y(8px, 68px, 45px, 90px);
+  .title-box {
+    display: flex;
+    flex-direction: row;
+    column-gap: 22px;
+    h1 {
+      color: $primary;
+      font-weight: 600;
+      margin: 12px 0;
+    }
+  }
+  p {
+    color: #848fac;
+    font-size: 14px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    .form-box {
+      display: flex;
+      flex-direction: column;
+      margin-top: 40px;
+      row-gap: 24px;
+      .label-checked {
+        color: $primary;
+        font: {
+          size: 12px;
+          family: "Poppins", system-ui;
+        }
+        span {
+          font-weight: 600;
+        }
+      }
+    }
+    .button-submit {
+      margin-top: 76px;
+      color: white;
+      background-color: $primary;
+      border-radius: 8px;
+      padding: 14px;
+      font: {
+        size: 14px;
+        weight: 500;
+      }
+      border: none;
+      cursor: pointer;
+      &:disabled {
+        cursor: default;
+      }
+    }
+    .button-submit + p {
+      color: #2b2b36;
+      text-align: center;
+      margin: 30px;
+      font: {
+        size: 14px;
+        weight: 600;
+      }
+    }
+    .button-google {
+      display: flex;
+      flex-direction: row;
+      column-gap: 8px;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      background-color: white;
+      border-radius: 8px;
+      padding: 16px;
+      font: {
+        size: 12px;
+        weight: 400;
+      }
+      border: 1px solid #c5d0e6;
+      cursor: pointer;
+      &:disabled {
+        cursor: default;
+      }
+    }
+    .button-facebook {
+      display: flex;
+      flex-direction: row;
+      column-gap: 8px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 15px;
+      color: black;
+      background-color: white;
+      border-radius: 8px;
+      padding: 16px;
+      font: {
+        size: 12px;
+        weight: 400;
+      }
+      border: 1px solid #c5d0e6;
+      cursor: pointer;
+      &:disabled {
+        cursor: default;
+      }
+    }
+    .button-facebook + p {
+      margin-top: 43px;
+      color: black;
+      text-align: center;
+      font: {
+        size: 12px;
+        weight: 400;
+      }
+      .signup-redirect {
+        font-weight: 600;
+        color: $primary;
+      }
+    }
+  }
+}
