@@ -25,13 +25,32 @@
         color: white;
         font-weight: 600;
         margin: 12px 0;
+        font-size: 16px;
+        @media (min-width: 640px) {
+          font-size: 20px;
+        }
+        @media (min-width: 768px) {
+          font-size: 24px;
+        }
+        @media (min-width: 1024px) {
+          font-size: 32px;
+        }
       }
     }
     .description-box {
       @include responsive-padding-x(32px, 86px, 57px, 114px);
       p {
         color: white;
-        font-size: 20px;
+        font-size: 16px;
+        @media (min-width: 640px) {
+          font-size: 12px;
+        }
+        @media (min-width: 768px) {
+          font-size: 16px;
+        }
+        @media (min-width: 1024px) {
+          font-size: 20px;
+        }
       }
     }
 

@@ -48,6 +48,19 @@
       flex-direction: column;
       margin-top: 73px;
       row-gap: 24px;
+      .show-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border-radius: 8px;
+        padding: 4px;
+        border: none;
+        cursor: pointer;
+        &:disabled {
+          cursor: default;
+        }
+      }
       .redirect-checked-box {
         display: flex;
         flex-direction: row;
