@@ -19,6 +19,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 import { signUp } from "@/modules/Auth/services/signUp";
+import { signInGoogle } from "@/modules/Auth/services/login";
 
 import "./form.scss";
 
@@ -114,6 +115,24 @@ const SignUpForm: React.FC = () => {
       setLoading(false);
     },
   });
+  const submitGoogle = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setLoading(true);
+    const { data, error } = await signInGoogle();
+
+    if (error) {
+      setSnack({
+        open: true,
+        type: "error",
+        message: error?.message,
+      });
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className="form">
@@ -143,6 +162,7 @@ const SignUpForm: React.FC = () => {
               name="fullName"
               label="fullName"
               type="text"
+              disabled={loading}
               placeholder="Enter Your name here"
               value={fields?.fullName}
               onChange={handleChange}
@@ -154,6 +174,7 @@ const SignUpForm: React.FC = () => {
               name="email"
               label="email"
               type="text"
+              disabled={loading}
               placeholder="Enter Your email here"
               value={fields?.email}
               onChange={handleChange}
@@ -165,6 +186,7 @@ const SignUpForm: React.FC = () => {
               name="password"
               label="password"
               type={showPassword ? "text" : "password"}
+              disabled={loading}
               placeholder="Enter Your Password here"
               value={fields?.password}
               onChange={handleChange}
@@ -195,6 +217,7 @@ const SignUpForm: React.FC = () => {
               name="confirmPassword"
               label="confirm Password"
               type={showPassword ? "text" : "password"}
+              disabled={loading}
               placeholder="Enter confirm Password here"
               value={fields?.confirmPassword}
               onChange={handleChange}
@@ -230,6 +253,7 @@ const SignUpForm: React.FC = () => {
                 <Checkbox
                   checked={fields?.agreement}
                   onChange={handleChecked}
+                  disabled={loading}
                   id="agreement"
                   name="agreement"
                   sx={{
@@ -267,6 +291,7 @@ const SignUpForm: React.FC = () => {
             className="button-google"
             style={{ cursor: loading ? "wait" : "pointer" }}
             disabled={loading}
+            onClick={submitGoogle}
             type="button">
             <img src={googleIcon} alt="google logo" />
             Sign Up with google
@@ -275,6 +300,7 @@ const SignUpForm: React.FC = () => {
             className="button-facebook"
             style={{ cursor: loading ? "wait" : "pointer" }}
             disabled={loading}
+            onClick={(e) => {}}
             type="button">
             <img src={facebookIcon} alt="facebook logo" />
             Sign Up with facebook

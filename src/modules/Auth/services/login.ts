@@ -1,5 +1,10 @@
-import { signInWithEmailAndPassword, User } from "firebase/auth";
-import { auth } from "@/configs/firebase-config";
+import {
+  signInWithEmailAndPassword,
+  User,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { auth, provider } from "@/configs/firebase-config";
 
 interface LoginParams {
   email: string;
@@ -7,6 +12,10 @@ interface LoginParams {
 }
 interface LoginResponse {
   data: User | null;
+  error: Error | null;
+}
+interface LogoutResponse {
+  data: any | null;
   error: Error | null;
 }
 export const Login = async (values: LoginParams): Promise<LoginResponse> => {
@@ -20,6 +29,28 @@ export const Login = async (values: LoginParams): Promise<LoginResponse> => {
     const user = userCredential.user;
 
     return { data: user, error: null };
+  } catch (error) {
+    return { data: null, error: error as Error };
+  }
+};
+
+export const signInGoogle = async (): Promise<LoginResponse> => {
+  try {
+    const userCredential = await signInWithPopup(auth, provider);
+
+    const user = userCredential.user;
+
+    return { data: user, error: null };
+  } catch (error) {
+    return { data: null, error: error as Error };
+  }
+};
+
+export const logout = async (): Promise<LogoutResponse> => {
+  try {
+    const response = await signOut(auth);
+
+    return { data: response, error: null };
   } catch (error) {
     return { data: null, error: error as Error };
   }

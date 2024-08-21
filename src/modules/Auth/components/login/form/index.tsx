@@ -17,7 +17,7 @@ import { Checkbox, FormControlLabel, InputAdornment } from "@mui/material";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
-import { Login } from "@/modules/Auth/services/login";
+import { Login, signInGoogle } from "@/modules/Auth/services/login";
 
 import "./form.scss";
 
@@ -82,7 +82,7 @@ const LoginForm: React.FC = () => {
         setLoading(false);
         return;
       }
-      console.log(data);
+
       setFields({
         email: "",
         password: "",
@@ -92,6 +92,24 @@ const LoginForm: React.FC = () => {
       setLoading(false);
     },
   });
+  const submitGoogle = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setLoading(true);
+    const { data, error } = await signInGoogle();
+
+    if (error) {
+      setSnack({
+        open: true,
+        type: "error",
+        message: error?.message,
+      });
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className="form">
@@ -177,6 +195,7 @@ const LoginForm: React.FC = () => {
           className="button-google"
           disabled={loading}
           style={{ cursor: loading ? "wait" : "pointer" }}
+          onClick={submitGoogle}
           type="button">
           <img src={googleIcon} alt="google logo" />
           Sign Up with google
