@@ -10,7 +10,7 @@ const initialState: UserState = {
   fullname: "",
   token: "",
   refreshToken: "",
-  expirationTime: "",
+  isConnected: false,
   rememberMe: false,
 };
 
@@ -26,7 +26,7 @@ const userSlice = createSlice({
       state.fullname = action.payload.fullname;
       state.token = action.payload.token;
       state.refreshToken = action.payload.refreshToken;
-      state.expirationTime = action.payload.expirationTime;
+      state.isConnected = action.payload.isConnected;
       state.rememberMe = action.payload.rememberMe;
     },
     updateToken: (
@@ -50,7 +50,7 @@ const userSlice = createSlice({
       state.fullname = "";
       state.token = "";
       state.refreshToken = "";
-      state.expirationTime = "";
+      state.isConnected = false;
       state.rememberMe = false;
     },
   },
