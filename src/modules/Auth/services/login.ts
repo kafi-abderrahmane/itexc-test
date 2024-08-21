@@ -3,6 +3,7 @@ import {
   User,
   signInWithPopup,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, providerGoogle, providerFb } from "@/configs/firebase-config";
 
@@ -15,6 +16,11 @@ interface LoginResponse {
   error: Error | null;
 }
 interface LogoutResponse {
+  data: any | null;
+  error: Error | null;
+}
+
+interface ResetPasswordResponse {
   data: any | null;
   error: Error | null;
 }
@@ -58,11 +64,23 @@ export const signInFb = async (): Promise<LoginResponse> => {
   }
 };
 
+export const resetPassword = async (
+  email: string
+): Promise<ResetPasswordResponse> => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+
+    return { data: "success", error: null };
+  } catch (error) {
+    return { data: null, error: error as Error };
+  }
+};
+
 export const logout = async (): Promise<LogoutResponse> => {
   try {
-    const response = await signOut(auth);
+    await signOut(auth);
 
-    return { data: response, error: null };
+    return { data: "success", error: null };
   } catch (error) {
     return { data: null, error: error as Error };
   }

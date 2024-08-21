@@ -145,6 +145,7 @@ const LoginForm: React.FC = () => {
             name="email"
             label="email"
             type="text"
+            disabled={loading}
             placeholder="Enter Your email here"
             value={fields?.email}
             onChange={handleChange}
@@ -156,6 +157,7 @@ const LoginForm: React.FC = () => {
             name="password"
             label="password"
             type={showPassword ? "text" : "password"}
+            disabled={loading}
             placeholder="Enter Your Password here"
             value={fields?.password}
             onChange={handleChange}
@@ -187,6 +189,7 @@ const LoginForm: React.FC = () => {
                 <Checkbox
                   checked={fields?.remember}
                   onChange={handleChecked}
+                  disabled={loading}
                   id="remember"
                   name="remember"
                   sx={{
