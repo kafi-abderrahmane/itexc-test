@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useSnackBar } from "@/contexts/SnackBarProvider";
+import { useDispatch } from "react-redux";
 
 import titleIcon from "@/assets/icon/signupIcon.svg";
 import showIcon from "@/assets/icon/Show.svg";
@@ -20,6 +21,7 @@ import { useFormik } from "formik";
 
 import { signUp } from "@/modules/Auth/services/signUp";
 import { signInGoogle, signInFb } from "@/modules/Auth/services/login";
+import { setUser } from "@/store/user/reducer";
 
 import "./form.scss";
 
@@ -33,7 +35,7 @@ interface fieldsSignUp {
 
 const SignUpForm: React.FC = () => {
   const { setSnack } = useSnackBar();
-
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [created, setCreated] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -131,7 +133,19 @@ const SignUpForm: React.FC = () => {
       setLoading(false);
       return;
     }
-
+    dispatch(
+      setUser({
+        uid: data?.user?.uid || "",
+        emailVerified: data?.user?.emailVerified || false,
+        email: data?.user?.email || "",
+        phoneNumber: data?.user?.providerData[0]?.phoneNumber || "",
+        fullname: data?.user?.displayName || "",
+        token: data?.accessToken || "",
+        refreshToken: data?.user?.refreshToken || "",
+        isConnected: true,
+        rememberMe: true,
+      })
+    );
     setLoading(false);
   };
 
@@ -150,7 +164,19 @@ const SignUpForm: React.FC = () => {
       setLoading(false);
       return;
     }
-
+    dispatch(
+      setUser({
+        uid: data?.user?.uid || "",
+        emailVerified: data?.user?.emailVerified || false,
+        email: data?.user?.email || "",
+        phoneNumber: data?.user?.providerData[0]?.phoneNumber || "",
+        fullname: data?.user?.displayName || "",
+        token: data?.accessToken || "",
+        refreshToken: data?.user?.refreshToken || "",
+        isConnected: true,
+        rememberMe: true,
+      })
+    );
     setLoading(false);
   };
 

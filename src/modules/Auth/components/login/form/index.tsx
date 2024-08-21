@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-
 import { Link } from "react-router-dom";
+
 import { useSnackBar } from "@/contexts/SnackBarProvider";
+import { useDispatch } from "react-redux";
 
 import titleIcon from "@/assets/icon/signinIcon.svg";
 import showIcon from "@/assets/icon/Show.svg";
@@ -18,6 +19,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 import { Login, signInGoogle, signInFb } from "@/modules/Auth/services/login";
+import { setUser } from "@/store/user/reducer";
 
 import "./form.scss";
 
@@ -29,6 +31,7 @@ interface fieldsLogin {
 
 const LoginForm: React.FC = () => {
   const { setSnack } = useSnackBar();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [fields, setFields] = useState<fieldsLogin>({
@@ -89,13 +92,24 @@ const LoginForm: React.FC = () => {
         remember: false,
       });
 
+      dispatch(
+        setUser({
+          uid: data?.user?.uid || "",
+          emailVerified: data?.user?.emailVerified || false,
+          email: data?.user?.email || "",
+          phoneNumber: data?.user?.providerData[0]?.phoneNumber || "",
+          fullname: data?.user?.displayName || "",
+          token: data?.accessToken || "",
+          refreshToken: data?.user?.refreshToken || "",
+          isConnected: true,
+          rememberMe: values?.remember,
+        })
+      );
       setLoading(false);
     },
   });
 
-  const submitGoogle = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const submitGoogle = async () => {
     setLoading(true);
     const { data, error } = await signInGoogle();
 
@@ -109,12 +123,23 @@ const LoginForm: React.FC = () => {
       return;
     }
 
+    dispatch(
+      setUser({
+        uid: data?.user?.uid || "",
+        emailVerified: data?.user?.emailVerified || false,
+        email: data?.user?.email || "",
+        phoneNumber: data?.user?.providerData[0]?.phoneNumber || "",
+        fullname: data?.user?.displayName || "",
+        token: data?.accessToken || "",
+        refreshToken: data?.user?.refreshToken || "",
+        isConnected: true,
+        rememberMe: fields?.remember,
+      })
+    );
     setLoading(false);
   };
 
-  const submitFb = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const submitFb = async () => {
     setLoading(true);
     const { data, error } = await signInFb();
 
@@ -127,7 +152,19 @@ const LoginForm: React.FC = () => {
       setLoading(false);
       return;
     }
-
+    dispatch(
+      setUser({
+        uid: data?.user?.uid || "",
+        emailVerified: data?.user?.emailVerified || false,
+        email: data?.user?.email || "",
+        phoneNumber: data?.user?.providerData[0]?.phoneNumber || "",
+        fullname: data?.user?.displayName || "",
+        token: data?.accessToken || "",
+        refreshToken: data?.user?.refreshToken || "",
+        isConnected: true,
+        rememberMe: fields?.remember,
+      })
+    );
     setLoading(false);
   };
 

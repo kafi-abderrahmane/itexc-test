@@ -11,17 +11,21 @@ interface LoginParams {
   email: string;
   password: string;
 }
+
 interface LoginResponse {
-  data: User | null;
+  data: {
+    user: User | null;
+    accessToken: string | null;
+  } | null;
   error: Error | null;
 }
 interface LogoutResponse {
-  data: any | null;
+  data: string | null;
   error: Error | null;
 }
 
 interface ResetPasswordResponse {
-  data: any | null;
+  data: string | null;
   error: Error | null;
 }
 export const Login = async (values: LoginParams): Promise<LoginResponse> => {
@@ -33,8 +37,9 @@ export const Login = async (values: LoginParams): Promise<LoginResponse> => {
     );
     // Signed up
     const user = userCredential.user;
+    const accessToken = await user.getIdToken();
 
-    return { data: user, error: null };
+    return { data: { user, accessToken }, error: null };
   } catch (error) {
     return { data: null, error: error as Error };
   }
@@ -45,8 +50,9 @@ export const signInGoogle = async (): Promise<LoginResponse> => {
     const userCredential = await signInWithPopup(auth, providerGoogle);
 
     const user = userCredential.user;
-
-    return { data: user, error: null };
+    const accessToken = await user.getIdToken();
+    console.log(userCredential);
+    return { data: { user, accessToken }, error: null };
   } catch (error) {
     return { data: null, error: error as Error };
   }
@@ -57,8 +63,9 @@ export const signInFb = async (): Promise<LoginResponse> => {
     const userCredential = await signInWithPopup(auth, providerFb);
 
     const user = userCredential.user;
+    const accessToken = await user.getIdToken();
 
-    return { data: user, error: null };
+    return { data: { user, accessToken }, error: null };
   } catch (error) {
     return { data: null, error: error as Error };
   }
