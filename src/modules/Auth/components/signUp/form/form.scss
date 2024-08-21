@@ -11,10 +11,29 @@
     display: flex;
     flex-direction: row;
     column-gap: 22px;
+    align-items: center;
     h1 {
       color: $primary;
       font-weight: 600;
       margin: 12px 0;
+      font-size: 16px;
+      @media (min-width: 640px) {
+        font-size: 20px;
+      }
+      @media (min-width: 768px) {
+        font-size: 24px;
+      }
+      @media (min-width: 1024px) {
+        font-size: 32px;
+      }
+    }
+    .title-img {
+      width: 24px;
+      height: 24px;
+      @media (min-width: 640px) {
+        width: 45px;
+        height: 45px;
+      }
     }
   }
   p {
@@ -120,6 +139,43 @@
       }
     }
     .button-facebook + p {
+      margin-top: 43px;
+      color: black;
+      text-align: center;
+      font: {
+        size: 12px;
+        weight: 400;
+      }
+      .signin-redirect {
+        font-weight: 600;
+        color: $primary;
+      }
+    }
+  }
+  .created {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    row-gap: 24px;
+    .verification {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .icon {
+        font-size: 50px;
+        color: green;
+      }
+      p {
+        margin-top: 24px;
+        color: $primary;
+        font: {
+          size: 14px;
+          weight: 400;
+        }
+      }
+    }
+    p {
       margin-top: 43px;
       color: black;
       text-align: center;

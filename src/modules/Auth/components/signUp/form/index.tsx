@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Link } from "react-router-dom";
+import { useSnackBar } from "@/contexts/SnackBarProvider";
 
 import titleIcon from "@/assets/icon/signupIcon.svg";
 import showIcon from "@/assets/icon/Show.svg";
 import unshowIcon from "@/assets/icon/unshow.svg";
 import googleIcon from "@/assets/icon/Google.svg";
 import facebookIcon from "@/assets/icon/Facebook.svg";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 import TextField from "@/components/Textfield";
 import { Checkbox, FormControlLabel, InputAdornment } from "@mui/material";
@@ -29,7 +31,10 @@ interface fieldsSignUp {
 }
 
 const SignUpForm: React.FC = () => {
+  const { snack, setSnack } = useSnackBar();
+
   const [loading, setLoading] = useState<boolean>(false);
+  const [created, setCreated] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [fields, setFields] = useState<fieldsSignUp>({
     fullName: "",
@@ -87,12 +92,25 @@ const SignUpForm: React.FC = () => {
         email: values.email,
         password: values.password,
       });
+
       if (error) {
-        console.log(error);
+        setSnack({
+          open: true,
+          type: "error",
+          message: error?.message,
+        });
         setLoading(false);
         return;
       }
-      console.log(data);
+
+      setFields({
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        agreement: false,
+      });
+      setCreated(true);
       setLoading(false);
     },
   });
@@ -101,146 +119,174 @@ const SignUpForm: React.FC = () => {
     <div className="form">
       <div className="title-box">
         <h1>Sing up your account</h1>
-        <img src={titleIcon} alt="sign up logo" />
+        <img src={titleIcon} alt="sign up logo" className="title-img" />
       </div>
       <p>Let’s Enter your data to continue use healthy 24 services</p>
-      <form autoComplete="off" onSubmit={formik.handleSubmit}>
-        <div className="form-box">
-          <TextField
-            id="fullName"
-            name="fullName"
-            label="fullName"
-            type="text"
-            placeholder="Enter Your name here"
-            value={fields?.fullName}
-            onChange={handleChange}
-            error={formik.touched.fullName && Boolean(formik.errors.fullName)}
-            helperText={formik.touched.fullName && formik.errors.fullName}
-          />
-          <TextField
-            id="email"
-            name="email"
-            label="email"
-            type="text"
-            placeholder="Enter Your email here"
-            value={fields?.email}
-            onChange={handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-          />
-          <TextField
-            id="password"
-            name="password"
-            label="password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter Your Password here"
-            value={fields?.password}
-            onChange={handleChange}
-            InputProps={{
-              style: {
-                fontFamily: "Poppins, system-ui",
-              },
-              endAdornment: (
-                <InputAdornment position="end">
-                  <button
-                    type="button"
-                    className="show-button"
-                    onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? (
-                      <img src={unshowIcon} alt="unshow logo" />
-                    ) : (
-                      <img src={showIcon} alt="show logo" />
-                    )}
-                  </button>
-                </InputAdornment>
-              ),
-            }}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-          <TextField
-            id="confirmPassword"
-            name="confirmPassword"
-            label="confirm Password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter confirm Password here"
-            value={fields?.confirmPassword}
-            onChange={handleChange}
-            InputProps={{
-              style: {
-                fontFamily: "Poppins, system-ui",
-              },
-              endAdornment: (
-                <InputAdornment position="end">
-                  <button
-                    type="button"
-                    className="show-button"
-                    onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? (
-                      <img src={unshowIcon} alt="unshow logo" />
-                    ) : (
-                      <img src={showIcon} alt="show logo" />
-                    )}
-                  </button>
-                </InputAdornment>
-              ),
-            }}
-            error={
-              formik.touched.confirmPassword &&
-              Boolean(formik.errors.confirmPassword)
-            }
-            helperText={
-              formik.touched.confirmPassword && formik.errors.confirmPassword
-            }
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={fields?.agreement}
-                onChange={handleChecked}
-                id="agreement"
-                name="agreement"
-                sx={{
-                  "&.Mui-checked": {
-                    color: "#192252",
-                  },
-                }}
-              />
-            }
-            label={
-              <p
-                className="label-checked"
-                style={{
-                  color:
-                    formik.touched.agreement && Boolean(formik.errors.agreement)
-                      ? "#d32f2f"
-                      : "#192252",
-                }}>
-                by sign up to healthy 24 you agree all <span>term</span> and{" "}
-                <span>condition</span>
-              </p>
-            }
-          />
+      {created ? (
+        <div className="created">
+          <div className="verification">
+            <CheckCircleOutlineIcon className="icon" />
+            <p>Account created, check your email to verify registration.</p>
+          </div>
+          <p>
+            You Already have account ?{" "}
+            <Link to="/sign-in">
+              <span className="signin-redirect">Sign in</span>
+            </Link>
+          </p>
         </div>
-        <button className="button-submit" disabled={loading} type="submit">
-          Sign Up
-        </button>
-        <p>Or</p>
-        <button className="button-google" disabled={loading} type="button">
-          <img src={googleIcon} alt="google logo" />
-          Sign Up with google
-        </button>
-        <button className="button-facebook" disabled={loading} type="button">
-          <img src={facebookIcon} alt="facebook logo" />
-          Sign Up with facebook
-        </button>
-        <p>
-          You Already have account ?{" "}
-          <Link to="/sign-in">
-            <span className="signin-redirect">Sign in</span>
-          </Link>
-        </p>
-      </form>
+      ) : (
+        <form autoComplete="off" onSubmit={formik.handleSubmit}>
+          <div className="form-box">
+            <TextField
+              id="fullName"
+              name="fullName"
+              label="fullName"
+              type="text"
+              placeholder="Enter Your name here"
+              value={fields?.fullName}
+              onChange={handleChange}
+              error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+              helperText={formik.touched.fullName && formik.errors.fullName}
+            />
+            <TextField
+              id="email"
+              name="email"
+              label="email"
+              type="text"
+              placeholder="Enter Your email here"
+              value={fields?.email}
+              onChange={handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+            <TextField
+              id="password"
+              name="password"
+              label="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter Your Password here"
+              value={fields?.password}
+              onChange={handleChange}
+              InputProps={{
+                style: {
+                  fontFamily: "Poppins, system-ui",
+                },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <button
+                      type="button"
+                      className="show-button"
+                      onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? (
+                        <img src={unshowIcon} alt="unshow logo" />
+                      ) : (
+                        <img src={showIcon} alt="show logo" />
+                      )}
+                    </button>
+                  </InputAdornment>
+                ),
+              }}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+            <TextField
+              id="confirmPassword"
+              name="confirmPassword"
+              label="confirm Password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter confirm Password here"
+              value={fields?.confirmPassword}
+              onChange={handleChange}
+              InputProps={{
+                style: {
+                  fontFamily: "Poppins, system-ui",
+                },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <button
+                      type="button"
+                      className="show-button"
+                      onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? (
+                        <img src={unshowIcon} alt="unshow logo" />
+                      ) : (
+                        <img src={showIcon} alt="show logo" />
+                      )}
+                    </button>
+                  </InputAdornment>
+                ),
+              }}
+              error={
+                formik.touched.confirmPassword &&
+                Boolean(formik.errors.confirmPassword)
+              }
+              helperText={
+                formik.touched.confirmPassword && formik.errors.confirmPassword
+              }
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={fields?.agreement}
+                  onChange={handleChecked}
+                  id="agreement"
+                  name="agreement"
+                  sx={{
+                    "&.Mui-checked": {
+                      color: "#192252",
+                    },
+                  }}
+                />
+              }
+              label={
+                <p
+                  className="label-checked"
+                  style={{
+                    color:
+                      formik.touched.agreement &&
+                      Boolean(formik.errors.agreement)
+                        ? "#d32f2f"
+                        : "#192252",
+                  }}>
+                  by sign up to healthy 24 you agree all <span>term</span> and{" "}
+                  <span>condition</span>
+                </p>
+              }
+            />
+          </div>
+          <button
+            className="button-submit"
+            disabled={loading}
+            style={{ cursor: loading ? "wait" : "pointer" }}
+            type="submit">
+            Sign Up
+          </button>
+          <p>Or</p>
+          <button
+            className="button-google"
+            style={{ cursor: loading ? "wait" : "pointer" }}
+            disabled={loading}
+            type="button">
+            <img src={googleIcon} alt="google logo" />
+            Sign Up with google
+          </button>
+          <button
+            className="button-facebook"
+            style={{ cursor: loading ? "wait" : "pointer" }}
+            disabled={loading}
+            type="button">
+            <img src={facebookIcon} alt="facebook logo" />
+            Sign Up with facebook
+          </button>
+          <p>
+            You Already have account ?{" "}
+            <Link to="/sign-in">
+              <span className="signin-redirect">Sign in</span>
+            </Link>
+          </p>
+        </form>
+      )}
     </div>
   );
 };

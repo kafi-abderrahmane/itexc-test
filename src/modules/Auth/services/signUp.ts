@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   User,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "@/configs/firebase-config";
 
@@ -23,6 +24,9 @@ export const signUp = async (values: SignUpParams): Promise<signUpResponse> => {
     );
     // Signed up
     const user = userCredential.user;
+
+    //send email
+    await sendEmailVerification(user);
 
     // Update user profile with the full name
     await updateProfile(user, {
