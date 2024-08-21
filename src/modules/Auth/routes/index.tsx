@@ -1,22 +1,25 @@
 import NonAuthGuard from "../guards/NonAuthGuard";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 const Login = lazy(() => import("../pages/Login"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const ForgetPassword = lazy(() => import("../pages/ForgetPassword"));
+const OtpVerification = lazy(() => import("../pages/OtpVerification"));
 
 export const authRoutes = [
   {
     path: "/",
     element: (
       <NonAuthGuard redirectTo={"/"}>
-        <Outlet />
+        <Suspense fallback={<div>Loading</div>}>
+          <Outlet />
+        </Suspense>
       </NonAuthGuard>
     ),
     children: [
       {
-        path: "login",
+        path: "sign-in",
         element: <Login />,
       },
       {
@@ -26,6 +29,10 @@ export const authRoutes = [
       {
         path: "forget-password",
         element: <ForgetPassword />,
+      },
+      {
+        path: "otp-verification",
+        element: <OtpVerification />,
       },
     ],
   },
