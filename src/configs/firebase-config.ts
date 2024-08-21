@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { API_KEY } from "./global-config";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -10,7 +11,7 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "***REMOVED***",
+  apiKey: API_KEY,
   authDomain: "itexc-b91ff.firebaseapp.com",
   projectId: "itexc-b91ff",
   storageBucket: "itexc-b91ff.appspot.com",
