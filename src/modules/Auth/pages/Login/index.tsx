@@ -2,7 +2,7 @@ import React from "react";
 
 //components
 import LoginForm from "../../components/login/form";
-import LoginInfo from "../../components/info";
+import Info from "../../components/info";
 
 import "./login.scss";
 
@@ -11,7 +11,7 @@ const LoginPage: React.FC = () => {
     <div className="login">
       <main>
         <LoginForm />
-        <LoginInfo />
+        <Info />
       </main>
     </div>
   );

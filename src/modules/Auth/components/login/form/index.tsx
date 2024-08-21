@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import titleIcon from "@/assets/icon/signupIcon.svg";
+import titleIcon from "@/assets/icon/signinIcon.svg";
 import googleIcon from "@/assets/icon/Google.svg";
 import facebookIcon from "@/assets/icon/Facebook.svg";
 
@@ -17,22 +17,18 @@ import { useFormik } from "formik";
 import "./form.scss";
 
 interface fieldsLogin {
-  fullName: string;
   email: string;
   password: string;
-  confirmPassword: string;
-  agreement: boolean;
+  remember: boolean;
 }
 
 const LoginForm: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [fields, setFields] = useState<fieldsLogin>({
-    fullName: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    agreement: false,
+    remember: false,
   });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,39 +37,27 @@ const LoginForm: React.FC = () => {
       [name]: value,
     }));
   };
-
   const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields((prev: fieldsLogin) => ({
       ...prev,
-      agreement: e?.target?.checked,
+      remember: e?.target?.checked,
     }));
   };
-
   const validationSchema = Yup.object().shape({
-    fullName: Yup.string()
-      .min(3, "FullName must be at least 3 characters long")
-      .required("FullName is required"),
     email: Yup.string()
       .required("Email is required")
       .email("Email must be a valid email address"),
     password: Yup.string()
       .min(6, "must be greater than 6 characters long")
       .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords must match")
-      .min(6, "must be greater than 6 characters long")
-      .required("Confirm password is required"),
-    agreement: Yup.boolean().oneOf([true], "required").required("required"),
   });
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      fullName: fields.fullName,
       email: fields.email,
       password: fields.password,
-      confirmPassword: fields.confirmPassword,
-      agreement: fields.agreement,
+      remember: fields?.remember,
     },
     validationSchema,
     onSubmit: (values: fieldsLogin) => {
@@ -84,21 +68,12 @@ const LoginForm: React.FC = () => {
   return (
     <div className="form">
       <div className="title-box">
-        <h1>Sing up your account</h1>
+        <h1>Welcome To Healthy 24</h1>
         <img src={titleIcon} alt="sign up logo" />
       </div>
-      <p>Let’s Enter your data to continue use healthy 24 services</p>
+      <p>Enter your account to use healthy 24 service</p>
       <form autoComplete="off" onSubmit={formik.handleSubmit}>
         <div className="form-box">
-          <TextField
-            id="fullName"
-            name="fullName"
-            label="fullName"
-            value={fields?.fullName}
-            onChange={handleChange}
-            error={formik.touched.fullName && Boolean(formik.errors.fullName)}
-            helperText={formik.touched.fullName && formik.errors.fullName}
-          />
           <TextField
             id="email"
             name="email"
@@ -117,51 +92,30 @@ const LoginForm: React.FC = () => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <TextField
-            id="confirmPassword"
-            name="confirmPassword"
-            label="confirm Password"
-            value={fields?.confirmPassword}
-            onChange={handleChange}
-            error={
-              formik.touched.confirmPassword &&
-              Boolean(formik.errors.confirmPassword)
-            }
-            helperText={
-              formik.touched.confirmPassword && formik.errors.confirmPassword
-            }
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={fields?.agreement}
-                onChange={handleChecked}
-                id="agreement"
-                name="agreement"
-                sx={{
-                  "&.Mui-checked": {
-                    color: "#192252",
-                  },
-                }}
-              />
-            }
-            label={
-              <p
-                className="label-checked"
-                style={{
-                  color:
-                    formik.touched.agreement && Boolean(formik.errors.agreement)
-                      ? "#d32f2f"
-                      : "#192252",
-                }}>
-                by sign up to healthy 24 you agree all <span>term</span> and{" "}
-                <span>condition</span>
-              </p>
-            }
-          />
+          <div className="redirect-checked-box">
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={fields?.remember}
+                  onChange={handleChecked}
+                  id="remember"
+                  name="remember"
+                  sx={{
+                    "&.Mui-checked": {
+                      color: "#192252",
+                    },
+                  }}
+                />
+              }
+              label={<p className="label-checked">Remember me</p>}
+            />
+            <Link to="/forget-password">
+              <span className="forget-password-redirect">Forget password</span>
+            </Link>
+          </div>
         </div>
         <button className="button-submit" type="submit">
-          Sign Up
+          Sign In
         </button>
         <p>Or</p>
         <button className="button-google" type="button">
@@ -173,9 +127,9 @@ const LoginForm: React.FC = () => {
           Sign Up with facebook
         </button>
         <p>
-          You Already have account ?{" "}
+          You don’thave account ?{" "}
           <Link to="/sign-up">
-            <span className="signup-redirect">Sign in</span>
+            <span className="signup-redirect">Sign up</span>
           </Link>
         </p>
       </form>
