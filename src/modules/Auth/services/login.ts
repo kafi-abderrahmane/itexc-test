@@ -4,7 +4,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth, provider } from "@/configs/firebase-config";
+import { auth, providerGoogle, providerFb } from "@/configs/firebase-config";
 
 interface LoginParams {
   email: string;
@@ -36,7 +36,19 @@ export const Login = async (values: LoginParams): Promise<LoginResponse> => {
 
 export const signInGoogle = async (): Promise<LoginResponse> => {
   try {
-    const userCredential = await signInWithPopup(auth, provider);
+    const userCredential = await signInWithPopup(auth, providerGoogle);
+
+    const user = userCredential.user;
+
+    return { data: user, error: null };
+  } catch (error) {
+    return { data: null, error: error as Error };
+  }
+};
+
+export const signInFb = async (): Promise<LoginResponse> => {
+  try {
+    const userCredential = await signInWithPopup(auth, providerFb);
 
     const user = userCredential.user;
 

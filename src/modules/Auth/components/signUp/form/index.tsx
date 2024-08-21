@@ -19,7 +19,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 import { signUp } from "@/modules/Auth/services/signUp";
-import { signInGoogle } from "@/modules/Auth/services/login";
+import { signInGoogle, signInFb } from "@/modules/Auth/services/login";
 
 import "./form.scss";
 
@@ -115,11 +115,31 @@ const SignUpForm: React.FC = () => {
       setLoading(false);
     },
   });
+
   const submitGoogle = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     setLoading(true);
     const { data, error } = await signInGoogle();
+
+    if (error) {
+      setSnack({
+        open: true,
+        type: "error",
+        message: error?.message,
+      });
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+  };
+
+  const submitFb = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setLoading(true);
+    const { data, error } = await signInFb();
 
     if (error) {
       setSnack({
@@ -300,7 +320,7 @@ const SignUpForm: React.FC = () => {
             className="button-facebook"
             style={{ cursor: loading ? "wait" : "pointer" }}
             disabled={loading}
-            onClick={(e) => {}}
+            onClick={submitFb}
             type="button">
             <img src={facebookIcon} alt="facebook logo" />
             Sign Up with facebook

@@ -17,7 +17,7 @@ import { Checkbox, FormControlLabel, InputAdornment } from "@mui/material";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
-import { Login, signInGoogle } from "@/modules/Auth/services/login";
+import { Login, signInGoogle, signInFb } from "@/modules/Auth/services/login";
 
 import "./form.scss";
 
@@ -92,11 +92,31 @@ const LoginForm: React.FC = () => {
       setLoading(false);
     },
   });
+
   const submitGoogle = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     setLoading(true);
     const { data, error } = await signInGoogle();
+
+    if (error) {
+      setSnack({
+        open: true,
+        type: "error",
+        message: error?.message,
+      });
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+  };
+
+  const submitFb = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setLoading(true);
+    const { data, error } = await signInFb();
 
     if (error) {
       setSnack({
@@ -204,6 +224,7 @@ const LoginForm: React.FC = () => {
           className="button-facebook"
           disabled={loading}
           style={{ cursor: loading ? "wait" : "pointer" }}
+          onClick={submitFb}
           type="button">
           <img src={facebookIcon} alt="facebook logo" />
           Sign Up with facebook
