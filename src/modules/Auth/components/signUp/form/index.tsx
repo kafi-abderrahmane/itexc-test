@@ -3,16 +3,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import titleIcon from "@/assets/icon/signupIcon.svg";
+import showIcon from "@/assets/icon/Show.svg";
+import unshowIcon from "@/assets/icon/unshow.svg";
 import googleIcon from "@/assets/icon/Google.svg";
 import facebookIcon from "@/assets/icon/Facebook.svg";
 
 import TextField from "@/components/Textfield";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControlLabel, InputAdornment } from "@mui/material";
 
 //form
 //validation
 import * as Yup from "yup";
 import { useFormik } from "formik";
+
+import { signUp } from "@/modules/Auth/services/signUp";
 
 import "./form.scss";
 
@@ -76,8 +80,20 @@ const SignUpForm: React.FC = () => {
       agreement: fields.agreement,
     },
     validationSchema,
-    onSubmit: (values: fieldsSignUp) => {
-      console.log(values);
+    onSubmit: async (values: fieldsSignUp) => {
+      setLoading(true);
+      const { data, error } = await signUp({
+        fullName: values.fullName,
+        email: values.email,
+        password: values.password,
+      });
+      if (error) {
+        console.log(error);
+        setLoading(false);
+        return;
+      }
+      console.log(data);
+      setLoading(false);
     },
   });
 
@@ -94,6 +110,8 @@ const SignUpForm: React.FC = () => {
             id="fullName"
             name="fullName"
             label="fullName"
+            type="text"
+            placeholder="Enter Your name here"
             value={fields?.fullName}
             onChange={handleChange}
             error={formik.touched.fullName && Boolean(formik.errors.fullName)}
@@ -103,6 +121,8 @@ const SignUpForm: React.FC = () => {
             id="email"
             name="email"
             label="email"
+            type="text"
+            placeholder="Enter Your email here"
             value={fields?.email}
             onChange={handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
@@ -112,8 +132,29 @@ const SignUpForm: React.FC = () => {
             id="password"
             name="password"
             label="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter Your Password here"
             value={fields?.password}
             onChange={handleChange}
+            InputProps={{
+              style: {
+                fontFamily: "Poppins, system-ui",
+              },
+              endAdornment: (
+                <InputAdornment position="end">
+                  <button
+                    type="button"
+                    className="show-button"
+                    onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? (
+                      <img src={unshowIcon} alt="unshow logo" />
+                    ) : (
+                      <img src={showIcon} alt="show logo" />
+                    )}
+                  </button>
+                </InputAdornment>
+              ),
+            }}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
@@ -121,8 +162,29 @@ const SignUpForm: React.FC = () => {
             id="confirmPassword"
             name="confirmPassword"
             label="confirm Password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter confirm Password here"
             value={fields?.confirmPassword}
             onChange={handleChange}
+            InputProps={{
+              style: {
+                fontFamily: "Poppins, system-ui",
+              },
+              endAdornment: (
+                <InputAdornment position="end">
+                  <button
+                    type="button"
+                    className="show-button"
+                    onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? (
+                      <img src={unshowIcon} alt="unshow logo" />
+                    ) : (
+                      <img src={showIcon} alt="show logo" />
+                    )}
+                  </button>
+                </InputAdornment>
+              ),
+            }}
             error={
               formik.touched.confirmPassword &&
               Boolean(formik.errors.confirmPassword)
@@ -160,15 +222,15 @@ const SignUpForm: React.FC = () => {
             }
           />
         </div>
-        <button className="button-submit" type="submit">
+        <button className="button-submit" disabled={loading} type="submit">
           Sign Up
         </button>
         <p>Or</p>
-        <button className="button-google" type="button">
+        <button className="button-google" disabled={loading} type="button">
           <img src={googleIcon} alt="google logo" />
           Sign Up with google
         </button>
-        <button className="button-facebook" type="button">
+        <button className="button-facebook" disabled={loading} type="button">
           <img src={facebookIcon} alt="facebook logo" />
           Sign Up with facebook
         </button>
