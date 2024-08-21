@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useSnackBar } from "@/contexts/SnackBarProvider";
@@ -31,7 +31,7 @@ interface fieldsSignUp {
 }
 
 const SignUpForm: React.FC = () => {
-  const { snack, setSnack } = useSnackBar();
+  const { setSnack } = useSnackBar();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [created, setCreated] = useState<boolean>(false);
