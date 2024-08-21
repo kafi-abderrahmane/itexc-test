@@ -1,0 +1,55 @@
+@import "../../../styles/globalAuth.scss";
+
+.form {
+  grid-column: span 1 / span 1;
+  //   min-height: 100vh;
+  //   height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  @include responsive-padding-x(32px, 86px, 57px, 114px);
+  @include responsive-padding-y(8px, 68px, 45px, 90px);
+  .title-box {
+    display: flex;
+    flex-direction: row;
+    column-gap: 22px;
+    h1 {
+      color: $primary;
+      font-weight: 600;
+      margin: 12px 0;
+    }
+  }
+  p {
+    color: #848fac;
+    font-size: 14px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .form-box {
+      display: flex;
+      flex-direction: column;
+      margin-top: 57px;
+      row-gap: 24px;
+    }
+    .button-submit {
+      margin-top: 29px;
+      color: white;
+      background-color: $primary;
+      border-radius: 8px;
+      padding: 14px;
+      font: {
+        size: 14px;
+        weight: 500;
+      }
+      border: none;
+      cursor: pointer;
+      &:disabled {
+        cursor: default;
+      }
+    }
+  }
+}
