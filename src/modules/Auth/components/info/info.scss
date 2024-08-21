@@ -14,6 +14,7 @@
     display: block;
   }
   .info-box {
+    overflow: hidden;
     @include responsive-padding-y(8px, 68px, 45px, 90px);
     .title-box {
       display: flex;
