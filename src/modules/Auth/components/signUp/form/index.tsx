@@ -175,7 +175,7 @@ const SignUpForm: React.FC = () => {
         <p>
           You Already have account ?{" "}
           <Link to="/sign-in">
-            <span className="signup-redirect">Sign in</span>
+            <span className="signin-redirect">Sign in</span>
           </Link>
         </p>
       </form>
