@@ -1,14 +1,13 @@
 import AuthGuard from "../guards/AuthGuard";
-import { PermissionGuardProps } from "../guards/PermissionGuard";
+import PermissionGuard from "../guards/PermissionGuard";
+import Loadable from "@/components/Loading/Loadable";
 
 import React, { lazy } from "react";
 
-const MainLayout = lazy(() => import("../layouts/MainLayout"));
-
-const PermissionGuard = lazy(() => import("../guards/PermissionGuard"));
+const MainLayout = Loadable(lazy(() => import("../layouts/MainLayout")));
 
 //pages
-const HomePage = lazy(() => import("../pages/HomePage/"));
+const HomePage = Loadable(lazy(() => import("../pages/HomePage/")));
 
 type RenderElementType = {
   element: React.ReactNode | null;
@@ -39,11 +38,7 @@ export const dashboardRoutes = [
         index: true,
         title: "statistiques",
         element: renderElement({
-          element: (
-            <div>
-              <HomePage />
-            </div>
-          ),
+          element: <HomePage />,
           permissions: [],
         }),
       },
