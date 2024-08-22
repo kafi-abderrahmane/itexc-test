@@ -16,7 +16,7 @@ const NonAuthGuard: React.FC<NonAuthGuardProps> = ({
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated === true) navigate("/");
+    if (isAuthenticated === true) navigate(redirectTo);
   }, [isAuthenticated]);
 
   if (isAuthenticated === "loading") return <LoadingPage />;
