@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "@/configs/firebase-config";
 import { onIdTokenChanged } from "firebase/auth";
 import { clearUser, updateToken } from "@/store/user/reducer";
+import { logoutFirebase } from "@/modules/Auth/services/login";
 
 import { UserState } from "@/store/types";
 import { RootState } from "@/store";
@@ -13,6 +14,7 @@ interface AuthContextType {
   user: UserState | null;
   isAuthenticated: "loading" | boolean;
   permissions: string[];
+  logout: () => void;
 }
 
 // Create the authentication context
@@ -40,6 +42,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     "loading"
   );
 
+  const logout = async () => {
+    setIsAuthenticated(false);
+    dispatch(clearUser());
+    await logoutFirebase();
+  };
+
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
       if (user) {
@@ -52,7 +60,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         );
       } else {
         setIsAuthenticated(false);
-        clearUser();
+        dispatch(clearUser());
       }
     });
 
@@ -67,6 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         user,
         isAuthenticated,
         permissions,
+        logout,
       }}>
       {children}
     </AuthContext.Provider>

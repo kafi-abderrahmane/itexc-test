@@ -83,7 +83,7 @@ export const resetPassword = async (
   }
 };
 
-export const logout = async (): Promise<LogoutResponse> => {
+export const logoutFirebase = async (): Promise<LogoutResponse> => {
   try {
     await signOut(auth);
 

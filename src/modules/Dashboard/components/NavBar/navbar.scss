@@ -1,0 +1,131 @@
+@import "@/assets/styles/variables.scss";
+
+$hover-bg: #f3f4f6;
+.navbar {
+  width: 100%;
+  max-height: $nav-height-sm;
+  padding: {
+    left: 24px;
+    right: 24px;
+  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  @media (min-width: 768px) {
+    // md breakpoint
+    max-height: $nav-height-md;
+  }
+  @media (min-width: 1024px) {
+    // lg breakpoint
+    max-height: $nav-height;
+  }
+  .nav-logo {
+    display: none;
+    margin: 0px 25px 0px 25px;
+    @media (min-width: 1024px) {
+      // lg breakpoint
+      display: block;
+    }
+  }
+  .button-drawer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+    @media (min-width: 1024px) {
+      // lg breakpoint
+      display: none;
+    }
+    &:disabled {
+      cursor: default;
+    }
+  }
+  p {
+    display: block;
+    color: $primary;
+    font: {
+      size: 16;
+      weight: 600;
+    }
+    @media (min-width: 1024px) {
+      // lg breakpoint
+      display: none;
+    }
+  }
+  .nav-profile {
+    display: flex;
+    column-gap: 30px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    @media (min-width: 1024px) {
+      // lg breakpoint
+      min-width: 250px;
+    }
+    .button-setting {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border-radius: 8px;
+      padding: 4px;
+      border: none;
+      cursor: pointer;
+      transition-duration: 500ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      &:disabled {
+        cursor: default;
+      }
+      &:hover {
+        background-color: $hover-bg;
+      }
+      @media (min-width: 1024px) {
+        // lg breakpoint
+        display: flex;
+      }
+    }
+    .button-notif {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border-radius: 8px;
+      padding: 4px;
+      border: none;
+      cursor: pointer;
+      transition-duration: 500ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      &:disabled {
+        cursor: default;
+      }
+      &:hover {
+        background-color: $hover-bg;
+      }
+    }
+    .img-profile {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      border-radius: 9999px;
+      @media (min-width: 1024px) {
+        // lg breakpoint
+        display: flex;
+      }
+    }
+  }
+}
+.drawer {
+  display: block;
+  @media (min-width: 1024px) {
+    // lg breakpoint
+    display: none;
+  }
+  .drawer-container {
+    width: 252px;
+  }
+}

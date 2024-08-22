@@ -1,7 +1,5 @@
 @import "@/assets/styles/variables.scss";
 
-$some-height: 100px;
-
 .main-layout {
   width: 100%;
   height: 100vh;
@@ -10,17 +8,35 @@ $some-height: 100px;
   flex-direction: column;
   .navbar-box {
     width: 100%;
-    height: $some-height;
-    border-bottom: 1px solid #dfe8f6;
+    height: $nav-height-sm;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media (min-width: 768px) {
+      // md breakpoint
+      height: $nav-height-md;
+    }
+    @media (min-width: 1024px) {
+      // lg breakpoint
+      border-bottom: 1px solid #dfe8f6;
+      height: $nav-height;
+    }
   }
   .dash-box {
     display: flex;
     flex-direction: row;
     .side-bar {
+      display: none;
       max-width: 252px;
       width: 100%;
-      height: calc(100vh - #{$some-height});
+      height: calc(100vh - #{$nav-height-sm});
       border-right: 1px solid #dfe8f6;
+      @media (min-width: 1024px) {
+        // lg breakpoint
+        display: block;
+        height: calc(100vh - #{$nav-height});
+      }
     }
     .dash-container {
       margin: 32px;
