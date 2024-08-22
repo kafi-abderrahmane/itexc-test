@@ -101,7 +101,6 @@ const LoginForm: React.FC = () => {
           fullname: data?.user?.displayName || "",
           token: data?.accessToken || "",
           refreshToken: data?.user?.refreshToken || "",
-          isConnected: true,
           rememberMe: values?.remember,
         })
       );
@@ -132,7 +131,6 @@ const LoginForm: React.FC = () => {
         fullname: data?.user?.displayName || "",
         token: data?.accessToken || "",
         refreshToken: data?.user?.refreshToken || "",
-        isConnected: true,
         rememberMe: fields?.remember,
       })
     );
@@ -161,7 +159,6 @@ const LoginForm: React.FC = () => {
         fullname: data?.user?.displayName || "",
         token: data?.accessToken || "",
         refreshToken: data?.user?.refreshToken || "",
-        isConnected: true,
         rememberMe: fields?.remember,
       })
     );

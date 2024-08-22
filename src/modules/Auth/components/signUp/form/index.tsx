@@ -142,7 +142,6 @@ const SignUpForm: React.FC = () => {
         fullname: data?.user?.displayName || "",
         token: data?.accessToken || "",
         refreshToken: data?.user?.refreshToken || "",
-        isConnected: true,
         rememberMe: true,
       })
     );
@@ -173,7 +172,6 @@ const SignUpForm: React.FC = () => {
         fullname: data?.user?.displayName || "",
         token: data?.accessToken || "",
         refreshToken: data?.user?.refreshToken || "",
-        isConnected: true,
         rememberMe: true,
       })
     );

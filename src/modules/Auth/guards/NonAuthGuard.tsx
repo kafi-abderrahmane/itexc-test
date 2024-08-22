@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthProvider";
+import LoadingPage from "@/components/Loading/LoadingPage";
 
 interface NonAuthGuardProps {
   children: React.ReactNode;
@@ -11,7 +13,13 @@ const NonAuthGuard: React.FC<NonAuthGuardProps> = ({
   redirectTo = "/",
 }) => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated]);
+
+  if (isAuthenticated === "loading") return <LoadingPage />;
   return <>{children}</>;
 };
 

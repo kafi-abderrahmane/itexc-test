@@ -10,7 +10,7 @@ const initialState: UserState = {
   fullname: "",
   token: "",
   refreshToken: "",
-  isConnected: false,
+
   rememberMe: false,
 };
 
@@ -26,13 +26,9 @@ const userSlice = createSlice({
       state.fullname = action.payload.fullname;
       state.token = action.payload.token;
       state.refreshToken = action.payload.refreshToken;
-      state.isConnected = action.payload.isConnected;
       state.rememberMe = action.payload.rememberMe;
     },
-    updateToken: (
-      state,
-      action: PayloadAction<{ token: string; refreshToken: string }>
-    ) => {
+    updateToken: (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token;
     },
     updateEmailAndFullname: (
@@ -50,12 +46,12 @@ const userSlice = createSlice({
       state.fullname = "";
       state.token = "";
       state.refreshToken = "";
-      state.isConnected = false;
       state.rememberMe = false;
     },
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, clearUser, updateToken, updateEmailAndFullname } =
+  userSlice.actions;
 
 export default userSlice.reducer;

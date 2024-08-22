@@ -2,6 +2,8 @@ import NonAuthGuard from "../guards/NonAuthGuard";
 import { lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
+import LoadingLinear from "@/components/Loading/LoadingLinear";
+
 const Login = lazy(() => import("../pages/Login"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const ForgetPassword = lazy(() => import("../pages/ForgetPassword"));
@@ -12,7 +14,7 @@ export const authRoutes = [
     path: "/",
     element: (
       <NonAuthGuard redirectTo={"/"}>
-        <Suspense fallback={<div>Loading</div>}>
+        <Suspense fallback={<LoadingLinear />}>
           <Outlet />
         </Suspense>
       </NonAuthGuard>

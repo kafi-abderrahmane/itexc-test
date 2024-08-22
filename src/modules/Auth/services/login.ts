@@ -51,7 +51,7 @@ export const signInGoogle = async (): Promise<LoginResponse> => {
 
     const user = userCredential.user;
     const accessToken = await user.getIdToken();
-    console.log(userCredential);
+
     return { data: { user, accessToken }, error: null };
   } catch (error) {
     return { data: null, error: error as Error };

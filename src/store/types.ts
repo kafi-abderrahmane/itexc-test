@@ -6,6 +6,5 @@ export interface UserState {
   fullname: string;
   token: string;
   refreshToken: string;
-  isConnected: "loading" | boolean;
   rememberMe: boolean;
 }
