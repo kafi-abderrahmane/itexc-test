@@ -36,9 +36,45 @@ export const dashboardRoutes = [
     children: [
       {
         index: true,
-        title: "statistiques",
+        title: "dashboard",
         element: renderElement({
           element: <HomePage />,
+          permissions: [],
+        }),
+      },
+      {
+        path: "patients",
+        index: true,
+        title: "patients",
+        element: renderElement({
+          element: <div>patients</div>,
+          permissions: [],
+        }),
+      },
+      {
+        path: "messages",
+        index: true,
+        title: "messages",
+        element: renderElement({
+          element: <div>messages</div>,
+          permissions: [],
+        }),
+      },
+      {
+        path: "appointment",
+        index: true,
+        title: "appointment",
+        element: renderElement({
+          element: <div>appointment</div>,
+          permissions: [],
+        }),
+      },
+      {
+        path: "history",
+        index: true,
+        title: "history",
+        element: renderElement({
+          element: <div>history</div>,
           permissions: [],
         }),
       },

@@ -1,13 +1,13 @@
 import React from "react";
 
-import logo from "@/assets/images/logo-healty.png";
+import logo from "@/assets/images/logo-healty.svg";
 import setting from "@/assets/icon/Setting.svg";
 import notif from "@/assets/icon/Notification.svg";
 import avatar from "@/assets/images/Avatar.svg";
 import drawer from "@/assets/icon/drawer.svg";
 
 import DropDownProfile from "../DropDownProfile";
-import Drawer from "@mui/material/Drawer";
+import Drawer from "../Drawer";
 
 import "./navbar.scss";
 
@@ -47,9 +47,7 @@ const NavBar: React.FC = () => {
           </DropDownProfile>
         </div>
       </nav>
-      <Drawer open={open} onClose={toggleDrawer(false)} className="drawer">
-        <div className="drawer-container">Drawer</div>
-      </Drawer>
+      <Drawer open={open} onClose={toggleDrawer(false)} />
     </>
   );
 };

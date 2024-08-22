@@ -5,8 +5,8 @@ $hover-bg: #f3f4f6;
   width: 100%;
   max-height: $nav-height-sm;
   padding: {
-    left: 24px;
-    right: 24px;
+    left: 16px;
+    right: 16px;
   }
   display: flex;
   flex-direction: row;
@@ -117,15 +117,5 @@ $hover-bg: #f3f4f6;
         display: flex;
       }
     }
-  }
-}
-.drawer {
-  display: block;
-  @media (min-width: 1024px) {
-    // lg breakpoint
-    display: none;
-  }
-  .drawer-container {
-    width: 252px;
   }
 }

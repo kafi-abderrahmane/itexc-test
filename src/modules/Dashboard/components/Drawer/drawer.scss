@@ -1,0 +1,111 @@
+@import "@/assets/styles/variables.scss";
+.drawer {
+  display: block;
+  @media (min-width: 1024px) {
+    // lg breakpoint
+    display: none;
+  }
+  .drawer-container {
+    width: 252px;
+    padding: 16px;
+    .drawer-top {
+      display: flex;
+      flex-direction: row;
+      column-gap: 22px;
+      align-items: center;
+      margin-left: 12px;
+    }
+    .drawer-profile {
+      display: flex;
+      flex-direction: column;
+      padding: 28px 12px 28px 12px;
+      row-gap: 24px;
+      .link-profile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        text-decoration-line: none;
+        column-gap: 16px;
+        span {
+          color: $primary;
+          font: {
+            size: 14px;
+            weight: 500;
+          }
+          opacity: 0.5;
+          transition-duration: 300ms;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          &:hover {
+            color: $primary;
+            opacity: 1;
+          }
+        }
+      }
+      .button-notif {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        background-color: transparent;
+        border: none;
+        width: 100%;
+        column-gap: 16px;
+        text-decoration-line: none;
+        cursor: pointer;
+        &:disabled {
+          cursor: default;
+        }
+        span {
+          color: $primary;
+          font: {
+            size: 14px;
+            weight: 500;
+            family: "Poppins", system-ui;
+          }
+          opacity: 0.5;
+          transition-duration: 300ms;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          &:hover {
+            color: $primary;
+            opacity: 1;
+          }
+        }
+      }
+      .button-setting {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        background-color: transparent;
+        border: none;
+        width: 100%;
+        column-gap: 16px;
+        text-decoration-line: none;
+        cursor: pointer;
+        &:disabled {
+          cursor: default;
+        }
+        span {
+          color: $primary;
+          font: {
+            size: 14px;
+            weight: 500;
+            family: "Poppins", system-ui;
+          }
+          opacity: 0.5;
+          transition-duration: 300ms;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          &:hover {
+            color: $primary;
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .darwer-nav {
+      margin-top: 32px;
+    }
+  }
+}

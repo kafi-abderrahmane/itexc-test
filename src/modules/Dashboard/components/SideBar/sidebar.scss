@@ -1,0 +1,196 @@
+@import "@/assets/styles/variables.scss";
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  .dash {
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    height: 56px;
+    align-items: center;
+    border-radius: 5px;
+    padding: {
+      left: 16px;
+      right: 16px;
+    }
+    text-decoration-line: none;
+    color: rgba($primary, 0.5);
+    svg {
+      path {
+        opacity: 0.5;
+      }
+    }
+    &:hover {
+      color: $primary;
+
+      svg {
+        path {
+          opacity: 1;
+        }
+      }
+    }
+    &.dash-selected {
+      color: $primary;
+      background-color: #eff3fa;
+
+      svg {
+        path {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .patients {
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    height: 56px;
+    align-items: center;
+    border-radius: 5px;
+    padding: {
+      left: 16px;
+      right: 16px;
+    }
+    text-decoration-line: none;
+    color: rgba($primary, 0.5);
+    svg {
+      g {
+        opacity: 0.5;
+      }
+    }
+    &:hover {
+      color: $primary;
+
+      svg {
+        g {
+          opacity: 1;
+        }
+      }
+    }
+    &.patients-selected {
+      color: $primary;
+      background-color: #eff3fa;
+      svg {
+        g {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .messages {
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    height: 56px;
+    align-items: center;
+    border-radius: 5px;
+    padding: {
+      left: 16px;
+      right: 16px;
+    }
+    text-decoration-line: none;
+    color: rgba($primary, 0.5);
+    svg {
+      g {
+        opacity: 0.5;
+      }
+    }
+    &:hover {
+      color: $primary;
+
+      svg {
+        g {
+          opacity: 1;
+        }
+      }
+    }
+    &.messages-selected {
+      color: $primary;
+      background-color: #eff3fa;
+      svg {
+        g {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .appointment {
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    height: 56px;
+    align-items: center;
+    border-radius: 5px;
+    padding: {
+      left: 16px;
+      right: 16px;
+    }
+    text-decoration-line: none;
+    color: rgba($primary, 0.5);
+    svg {
+      g {
+        opacity: 0.5;
+      }
+    }
+    &:hover {
+      color: $primary;
+
+      svg {
+        g {
+          opacity: 1;
+        }
+      }
+    }
+    &.appointment-selected {
+      color: $primary;
+      background-color: #eff3fa;
+      svg {
+        g {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .history {
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    height: 56px;
+    align-items: center;
+    border-radius: 5px;
+    padding: {
+      left: 16px;
+      right: 16px;
+    }
+    text-decoration-line: none;
+    color: rgba($primary, 0.5);
+    svg {
+      g {
+        opacity: 0.5;
+      }
+    }
+    &:hover {
+      color: $primary;
+
+      svg {
+        g {
+          opacity: 1;
+        }
+      }
+    }
+    &.history-selected {
+      color: $primary;
+      background-color: #eff3fa;
+      svg {
+        g {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

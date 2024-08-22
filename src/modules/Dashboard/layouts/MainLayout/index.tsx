@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../../components/NavBar";
+import SideBar from "../../components/SideBar";
 import "./mainlayout.scss";
 
 const MainLayout = () => {
@@ -9,7 +10,9 @@ const MainLayout = () => {
         <NavBar />
       </div>
       <div className="dash-box">
-        <div className="side-bar">sideBar</div>
+        <div className="side-bar">
+          <SideBar />
+        </div>
         <div className="dash-container">
           <Outlet />
         </div>

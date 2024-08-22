@@ -8,19 +8,18 @@
   flex-direction: column;
   .navbar-box {
     width: 100%;
-    height: $nav-height-sm;
-
+    min-height: $nav-height-sm;
     display: flex;
     align-items: center;
     justify-content: center;
     @media (min-width: 768px) {
       // md breakpoint
-      height: $nav-height-md;
+      min-height: $nav-height-md;
     }
     @media (min-width: 1024px) {
       // lg breakpoint
       border-bottom: 1px solid #dfe8f6;
-      height: $nav-height;
+      min-height: $nav-height;
     }
   }
   .dash-box {
@@ -32,6 +31,16 @@
       width: 100%;
       height: calc(100vh - #{$nav-height-sm});
       border-right: 1px solid #dfe8f6;
+      padding: {
+        top: 23px;
+        left: 16px;
+        right: 16px;
+      }
+      @media (min-width: 768px) {
+        // md breakpoint
+        display: none;
+        height: calc(100vh - #{$nav-height-md});
+      }
       @media (min-width: 1024px) {
         // lg breakpoint
         display: block;
@@ -39,7 +48,7 @@
       }
     }
     .dash-container {
-      margin: 32px;
+      padding: 16px;
       width: 100%;
     }
   }
