@@ -1,0 +1,95 @@
+@import "@/assets/styles/variables.scss";
+
+.calender {
+  .calender-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dfe8f6;
+    border-radius: 8px;
+    padding: 16px;
+
+    .title {
+      width: 100%;
+      p {
+        margin: 0;
+        color: $primary;
+        font: {
+          weight: 600;
+          size: 20px;
+        }
+      }
+    }
+    .upcoming {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .top {
+        display: flex;
+        flex-direction: row;
+
+        .title-upcoming {
+          width: 100%;
+
+          p {
+            margin: 0;
+            color: $primary;
+            font: {
+              weight: 600;
+              size: 20px;
+            }
+          }
+        }
+        .view-all {
+          span {
+            white-space: nowrap;
+            color: #1a71ff;
+            font-size: 12px;
+          }
+        }
+      }
+      .card {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: row;
+        padding: 8px 16px 8px 16px;
+        column-gap: 16px;
+        background-color: #f0f9fd;
+        border-radius: 10px;
+        border: none;
+        .img-card {
+          width: 47px;
+          height: 47px;
+          border-radius: 9999px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: $primary;
+          color: white;
+        }
+        .info-card {
+          text-align: left;
+          p {
+            margin: 0;
+            color: $primary;
+            font: {
+              family: "Poppins", system-ui;
+              size: 16px;
+              weight: 500;
+            }
+          }
+          span {
+            margin-top: 5px;
+            color: rgba(13, 13, 13, 0.6);
+            font: {
+              family: "Poppins", system-ui;
+              size: 12px;
+              weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}

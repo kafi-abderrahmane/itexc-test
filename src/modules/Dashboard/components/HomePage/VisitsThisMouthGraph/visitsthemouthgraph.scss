@@ -1,0 +1,60 @@
+@import "@/assets/styles/variables.scss";
+
+.visits {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .title-visits {
+    display: none;
+    flex-direction: row;
+    column-gap: 22px;
+    align-items: center;
+    margin-bottom: 45px;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+    h1 {
+      color: $primary;
+      font-weight: 600;
+      margin: 12px 0;
+      font-size: 16px;
+      @media (min-width: 640px) {
+        font-size: 20px;
+      }
+      @media (min-width: 768px) {
+        font-size: 24px;
+      }
+      @media (min-width: 1024px) {
+        font-size: 32px;
+      }
+    }
+  }
+  .visits-chart {
+    border: 1px solid #dfe8f6;
+    border-radius: 8px;
+    padding: 16px 16px 16px 16px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @media (min-width: 640px) {
+      padding: 20px 20px 20px 20px;
+    }
+    p {
+      text-align: left;
+      width: 100%;
+      color: $primary;
+      font: {
+        weight: 600;
+        size: 20px;
+      }
+    }
+    .chart {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

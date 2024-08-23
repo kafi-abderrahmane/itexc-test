@@ -31,7 +31,7 @@ const DrawerSideBar: React.FC<DrawerSideBarProps> = ({ open, onClose }) => {
             alt="logo"
           />
         </div>
-        <div className="drawer-profile">
+        <div className="drawer-profile" onClick={() => onClose(false)}>
           <Link title="profile" to="/profile" className="link-profile">
             <img src={avatar} width={36} height={36} alt="logo profile" />
             <span>Edit My Profile</span>
@@ -45,7 +45,7 @@ const DrawerSideBar: React.FC<DrawerSideBarProps> = ({ open, onClose }) => {
             <span>Settings</span>
           </button>
         </div>
-        <div className="darwer-nav">
+        <div className="darwer-nav" onClick={() => onClose(false)}>
           <SideBar />
         </div>
       </div>
