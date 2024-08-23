@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { apiSlice } from "@/store/apiSlice";
 
 import TextField from "@/components/Textfield";
+// import ModalEditMedia from "./ModalEditMedia";
 
 import coverP from "@/assets/images/cover.png";
 import profileP from "@/assets/images/profile.png";
@@ -38,7 +39,7 @@ const EditProfile: React.FC = () => {
 
   const [updateProfile, variableUpdate] = useUpdateProfileMutation();
   const [createProfile, variableCreate] = useCreateProfileMutation();
-
+  const [open, setOpen] = useState<boolean>(false);
   const [fields, setFields] = useState<ProfileFields>({
     fullname: "",
     speciality: "",
@@ -131,7 +132,11 @@ const EditProfile: React.FC = () => {
         <span>Profile picture</span>
         <div className="box-profile">
           <img src={profileP} width={56} height={56} className="profile-img" />
-          <button type="button" disabled={isLoading} className="change-button">
+          <button
+            type="button"
+            disabled={isLoading}
+            onClick={() => setOpen(!open)}
+            className="change-button">
             Change photo
           </button>
           <button type="button" disabled={isLoading} className="remove-button">
@@ -174,12 +179,22 @@ const EditProfile: React.FC = () => {
           type="text"
           disabled={isLoading}
           placeholder="Enter Your description here"
+          rows={5}
+          multiline
           value={fields?.description}
           onChange={handleChange}
           error={
             formik.touched.description && Boolean(formik.errors.description)
           }
           helperText={formik.touched.description && formik.errors.description}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "8px",
+              "&.Mui-focused fieldset": {
+                borderColor: "#192252",
+              },
+            },
+          }}
         />
         <div className="submit-buttons">
           <button
@@ -198,6 +213,7 @@ const EditProfile: React.FC = () => {
           </button>
         </div>
       </form>
+      {/* <ModalEditMedia open={open} handleClose={() => setOpen(false)} /> */}
     </div>
   );
 };
