@@ -5,8 +5,9 @@ import { auth } from "@/configs/firebase-config";
 import { onIdTokenChanged } from "firebase/auth";
 import { clearUser, updateToken } from "@/store/user/reducer";
 import { logoutFirebase } from "@/modules/Auth/services/login";
+import { useGetProfileByIdQuery } from "@/store/apiSlice";
 
-import { UserState } from "@/store/types";
+import { UserState, ProfileData } from "@/store/types";
 import { RootState } from "@/store";
 
 // Define the shape of the authentication context
@@ -14,6 +15,7 @@ interface AuthContextType {
   user: UserState | null;
   isAuthenticated: "loading" | boolean;
   permissions: string[];
+  profile: ProfileData | null;
   logout: () => void;
 }
 
@@ -69,12 +71,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const [permissions, setPermissions] = useState([]);
 
+  const { data, error, isLoading } = useGetProfileByIdQuery(user.uid, {
+    skip: !user.uid,
+  });
+
   return (
     <AuthContext.Provider
       value={{
         user,
         isAuthenticated,
         permissions,
+        profile: data ? data[0] : null,
         logout,
       }}>
       {children}

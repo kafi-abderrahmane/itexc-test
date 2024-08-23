@@ -8,6 +8,15 @@ export interface UserState {
   refreshToken: string;
   rememberMe: boolean;
 }
+export interface ProfileData {
+  id: string;
+  fullname: string;
+  speciality: string;
+  description: string;
+  picture: string;
+  cover: string;
+  idfirebase: string;
+}
 
 export interface Patient {
   fullname: string;

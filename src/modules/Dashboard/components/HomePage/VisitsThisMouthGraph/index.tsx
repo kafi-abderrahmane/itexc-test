@@ -1,11 +1,12 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 import { useSelector } from "react-redux";
-import { UserState } from "@/store/types";
+import { useAuth } from "@/contexts/AuthProvider";
 import { RootState } from "@/store";
 import "./visitsthemouthgraph.scss";
 
 const VisitsThisMouthGraph: React.FC = () => {
+  const { profile } = useAuth();
   const user = useSelector((state: RootState) => state.user);
   const data2 = [
     { day: 1, visits: 30 },
@@ -21,7 +22,7 @@ const VisitsThisMouthGraph: React.FC = () => {
   return (
     <div className="visits">
       <div className="title-visits">
-        <h1>Welcome back Dr. {user?.fullname}!</h1>
+        <h1>Welcome back Dr. {profile?.fullname || user?.fullname}!</h1>
       </div>
 
       <div className="visits-chart">

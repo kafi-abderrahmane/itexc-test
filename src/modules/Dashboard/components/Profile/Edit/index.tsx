@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useSnackBar } from "@/contexts/SnackBarProvider";
+import { useAuth } from "@/contexts/AuthProvider";
+import {
+  useCreateProfileMutation,
+  useUpdateProfileMutation,
+} from "@/store/apiSlice";
+import { useDispatch } from "react-redux";
+import { apiSlice } from "@/store/apiSlice";
 
 import TextField from "@/components/Textfield";
 
@@ -15,34 +22,53 @@ import { useFormik } from "formik";
 
 import "./edit.scss";
 
-interface fieldsEdit {
-  fullName: string;
+interface ProfileFields {
+  fullname: string;
   speciality: string;
   description: string;
+  picture: string;
+  cover: string;
 }
 
 const EditProfile: React.FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { setSnack } = useSnackBar();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [fields, setFields] = useState<fieldsEdit>({
-    fullName: "",
+  const { user, profile } = useAuth();
+
+  const [updateProfile, variableUpdate] = useUpdateProfileMutation();
+  const [createProfile, variableCreate] = useCreateProfileMutation();
+
+  const [fields, setFields] = useState<ProfileFields>({
+    fullname: "",
     speciality: "",
     description: "",
+    cover: "",
+    picture: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFields((prev: fieldsEdit) => ({
+    setFields((prev: ProfileFields) => ({
       ...prev,
       [name]: value,
     }));
   };
 
+  useEffect(() => {
+    if (profile && !fields?.fullname) {
+      setFields(profile);
+    }
+  }, [profile]);
+
+  const { isLoading, isSuccess, isError, error } = profile?.id
+    ? variableUpdate
+    : variableCreate;
+
   const validationSchema = Yup.object().shape({
-    fullName: Yup.string()
-      .min(3, "FullName must be at least 3 characters long")
-      .required("FullName is required"),
+    fullname: Yup.string()
+      .min(3, "Fullname must be at least 3 characters long")
+      .required("Fullname is required"),
     speciality: Yup.string()
       .min(3, "speciality must be at least 3 characters long")
       .required("speciality is required"),
@@ -54,20 +80,38 @@ const EditProfile: React.FC = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      fullName: fields.fullName,
+      fullname: fields.fullname,
       speciality: fields.speciality,
       description: fields.description,
+      cover: fields.cover,
+      picture: fields.picture,
     },
     validationSchema,
-    onSubmit: async (values: fieldsEdit) => {
-      setLoading(true);
+    onSubmit: async (values: ProfileFields) => {
+      try {
+        const result = profile?.id
+          ? await updateProfile({
+              id: profile?.id || "",
+              profileData: values,
+            }).unwrap()
+          : await createProfile({
+              ...values,
+              idfirebase: user?.uid || "",
+            }).unwrap();
 
-      setSnack({
-        open: true,
-        type: "success",
-        message: "edited",
-      });
-      setLoading(false);
+        dispatch(apiSlice.util.invalidateTags(["Profile"]));
+        setSnack({
+          open: true,
+          type: "success",
+          message: "edited",
+        });
+      } catch (err) {
+        setSnack({
+          open: true,
+          type: "error",
+          message: "error",
+        });
+      }
     },
   });
   return (
@@ -87,10 +131,10 @@ const EditProfile: React.FC = () => {
         <span>Profile picture</span>
         <div className="box-profile">
           <img src={profileP} width={56} height={56} className="profile-img" />
-          <button type="button" className="change-button">
+          <button type="button" disabled={isLoading} className="change-button">
             Change photo
           </button>
-          <button type="button" className="remove-button">
+          <button type="button" disabled={isLoading} className="remove-button">
             Remove
           </button>
         </div>
@@ -100,23 +144,23 @@ const EditProfile: React.FC = () => {
         onSubmit={formik.handleSubmit}
         autoComplete="off">
         <TextField
-          id="fullName"
-          name="fullName"
+          id="fullname"
+          name="fullname"
           label="Full Name"
           type="text"
-          disabled={loading}
+          disabled={isLoading}
           placeholder="Enter Your name here"
-          value={fields?.fullName}
+          value={fields?.fullname}
           onChange={handleChange}
-          error={formik.touched.fullName && Boolean(formik.errors.fullName)}
-          helperText={formik.touched.fullName && formik.errors.fullName}
+          error={formik.touched.fullname && Boolean(formik.errors.fullname)}
+          helperText={formik.touched.fullname && formik.errors.fullname}
         />
         <TextField
           id="speciality"
           name="speciality"
           label="Speciality"
           type="text"
-          disabled={loading}
+          disabled={isLoading}
           placeholder="Enter Your speciality here"
           value={fields?.speciality}
           onChange={handleChange}
@@ -128,7 +172,7 @@ const EditProfile: React.FC = () => {
           name="description"
           label="Profile Desciption"
           type="text"
-          disabled={loading}
+          disabled={isLoading}
           placeholder="Enter Your description here"
           value={fields?.description}
           onChange={handleChange}
@@ -141,10 +185,15 @@ const EditProfile: React.FC = () => {
           <button
             type="button"
             onClick={() => navigate("/profile")}
+            disabled={isLoading}
             className="cancel-button">
             Cancel
           </button>
-          <button type="submit" className="save-button">
+          <button
+            type="submit"
+            style={{ cursor: isLoading ? "wait" : "pointer" }}
+            className="save-button"
+            disabled={isLoading}>
             Save Changes
           </button>
         </div>

@@ -89,6 +89,9 @@
           weight: 400;
           size: 12px;
         }
+        &:disabled {
+          cursor: default;
+        }
       }
       .remove-button {
         border-radius: 8px;
@@ -100,6 +103,9 @@
         font: {
           weight: 400;
           size: 12px;
+        }
+        &:disabled {
+          cursor: default;
         }
       }
     }
@@ -125,6 +131,9 @@
           weight: 400;
           size: 12px;
         }
+        &:disabled {
+          cursor: default;
+        }
       }
       .cancel-button {
         border-radius: 8px;
@@ -136,6 +145,9 @@
         font: {
           weight: 400;
           size: 12px;
+        }
+        &:disabled {
+          cursor: default;
         }
       }
     }
