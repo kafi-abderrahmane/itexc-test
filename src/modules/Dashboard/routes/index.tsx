@@ -9,6 +9,7 @@ const MainLayout = Loadable(lazy(() => import("../layouts/MainLayout")));
 //pages
 const HomePage = Loadable(lazy(() => import("../pages/HomePage")));
 const HistoryPage = Loadable(lazy(() => import("../pages/History")));
+const ProfilePage = Loadable(lazy(() => import("../pages/Profile")));
 
 type RenderElementType = {
   element: React.ReactNode | null;
@@ -76,6 +77,15 @@ export const dashboardRoutes = [
         title: "history",
         element: renderElement({
           element: <HistoryPage />,
+          permissions: [],
+        }),
+      },
+      {
+        path: "profile",
+        index: false,
+        title: "profile",
+        element: renderElement({
+          element: <ProfilePage />,
           permissions: [],
         }),
       },
