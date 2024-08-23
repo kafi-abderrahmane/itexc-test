@@ -1,0 +1,149 @@
+@import "@/assets/styles/variables.scss";
+
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 95vw;
+  height: 70vh;
+  background-color: white;
+  border: 2px solid black;
+  overflow: auto;
+  border-radius: 8px;
+  padding: 0px 0 26px 0;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 640px) {
+    max-width: 70vw;
+  }
+  .title-history {
+    display: flex;
+    flex-direction: row;
+    column-gap: 22px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 16px 0px 16px;
+    border-bottom: 1px solid #c5d0e6;
+    @media (min-width: 640px) {
+      // sm breakpoint
+      padding: 0px 28px 0px 28px;
+    }
+    h1 {
+      color: $primary;
+      font-weight: 600;
+      margin: 12px 0;
+      font-size: 16px;
+      @media (min-width: 640px) {
+        font-size: 20px;
+      }
+      @media (min-width: 768px) {
+        font-size: 24px;
+      }
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      padding: 0px;
+      border: none;
+      cursor: pointer;
+      &:disabled {
+        cursor: default;
+      }
+    }
+  }
+  .cover-box-edit {
+    padding: 0px 16px 0px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 27px auto 0;
+    overflow: hidden;
+    height: 246px;
+
+    span {
+      color: $primary;
+      font: {
+        weight: 500;
+        size: 16px;
+      }
+      margin-bottom: 8px;
+    }
+    .image-drop {
+      position: relative;
+      .remove-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        padding: 0px;
+        border: none;
+        cursor: pointer;
+        &:disabled {
+          cursor: default;
+        }
+      }
+
+      .cover-img {
+        margin-top: 12px;
+        width: 100%;
+        object-fit: contain;
+      }
+      .picture-img {
+        margin-top: 12px;
+        width: 200px;
+        height: 200px;
+        border-radius: 9999px;
+        object-fit: contain;
+      }
+    }
+    & .picture {
+      width: min-content;
+    }
+  }
+  .submit-buttons {
+    padding: 0px 16px 0px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    .save-button {
+      cursor: pointer;
+      background: #103f74;
+      border-radius: 8px;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font: {
+        weight: 400;
+        size: 12px;
+      }
+      &:disabled {
+        cursor: default;
+      }
+    }
+    .cancel-button {
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 12px 24px;
+      color: $primary;
+      border: none;
+      background-color: white;
+      font: {
+        weight: 400;
+        size: 12px;
+      }
+      &:disabled {
+        cursor: default;
+      }
+    }
+  }
+}

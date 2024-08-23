@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { apiSlice } from "@/store/apiSlice";
 
 import TextField from "@/components/Textfield";
-// import ModalEditMedia from "./ModalEditMedia";
+import ModalEditMedia from "./ModalEditMedia";
 
 import coverP from "@/assets/images/cover.png";
 import profileP from "@/assets/images/profile.png";
@@ -48,12 +48,25 @@ const EditProfile: React.FC = () => {
     picture: "",
   });
 
+  const [cover, setCover] = useState<File | null>(null);
+  const [picture, setPicture] = useState<File | null>(null);
+  console.log(cover, picture);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFields((prev: ProfileFields) => ({
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleChangeMedia = (cover: File, picture: File) => {
+    setCover(cover);
+    setPicture(picture);
+  };
+  const handleRemove = () => {
+    setCover(null);
+    setPicture(null);
   };
 
   useEffect(() => {
@@ -115,6 +128,7 @@ const EditProfile: React.FC = () => {
       }
     },
   });
+
   return (
     <div className="edit-profile-display">
       <div className="title-edit">
@@ -126,12 +140,20 @@ const EditProfile: React.FC = () => {
 
       <div className="cover-box-edit">
         <span>Cover</span>
-        <img src={coverP} className="cover-img" />
+        <img
+          src={cover ? URL.createObjectURL(cover) : coverP}
+          className="cover-img"
+        />
       </div>
       <div className="profile-picture-box">
         <span>Profile picture</span>
         <div className="box-profile">
-          <img src={profileP} width={56} height={56} className="profile-img" />
+          <img
+            src={picture ? URL.createObjectURL(picture) : profileP}
+            width={56}
+            height={56}
+            className="profile-img"
+          />
           <button
             type="button"
             disabled={isLoading}
@@ -139,7 +161,11 @@ const EditProfile: React.FC = () => {
             className="change-button">
             Change photo
           </button>
-          <button type="button" disabled={isLoading} className="remove-button">
+          <button
+            type="button"
+            disabled={isLoading}
+            onClick={handleRemove}
+            className="remove-button">
             Remove
           </button>
         </div>
@@ -213,7 +239,11 @@ const EditProfile: React.FC = () => {
           </button>
         </div>
       </form>
-      {/* <ModalEditMedia open={open} handleClose={() => setOpen(false)} /> */}
+      <ModalEditMedia
+        open={open}
+        handleClose={() => setOpen(false)}
+        onSubmit={handleChangeMedia}
+      />
     </div>
   );
 };
