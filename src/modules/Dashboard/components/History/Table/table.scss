@@ -1,0 +1,154 @@
+@import "@/assets/styles/variables.scss";
+
+.table-histoty {
+  .table-container {
+    overflow: auto;
+
+    table {
+      width: 100%;
+      min-width: 748px;
+      tr {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+
+        color: #2a3563;
+        border-radius: 8px;
+
+        font: {
+          size: 14px;
+          weight: 500;
+        }
+        th {
+          padding: {
+            top: 11px;
+            bottom: 11px;
+          }
+          background-color: #eff3fa;
+          flex: 1 1 0%;
+          text-align: start;
+          padding: {
+            left: 16px;
+            right: 16px;
+          }
+        }
+        & .double-th {
+          flex: 2 1 0%;
+        }
+        & .half-th {
+          flex: 0.5 1 0%;
+        }
+      }
+      .cell-table {
+        cursor: default;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        min-height: 60px;
+        transition-duration: 300ms;
+        &:hover {
+          background-color: #f1f1f1;
+        }
+        @media (min-width: 640px) {
+          cursor: pointer;
+        }
+        td {
+          flex: 1 1 0%;
+          word-wrap: break-word;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          padding: {
+            left: 16px;
+            right: 16px;
+          }
+          color: $primary;
+          font: {
+            size: 14px;
+            weight: 400;
+          }
+          .status {
+            padding: 10px 16px 10px 16px;
+            border-radius: 4px;
+            width: min-content;
+          }
+          .patient {
+            display: flex;
+            flex-direction: row;
+            column-gap: 8px;
+            align-items: center;
+            justify-content: flex-start;
+            .patient-img {
+              width: 47px;
+              height: 47px;
+              border-radius: 9999px;
+            }
+            .fullname {
+              p {
+                margin: 0px;
+                color: $primary;
+                font: {
+                  size: 14px;
+                  weight: 500;
+                }
+              }
+              span {
+                margin-top: 5px;
+                color: #c5d0e6;
+                font: {
+                  size: 12px;
+                  weight: 500;
+                }
+              }
+            }
+          }
+        }
+
+        & .double-td {
+          flex: 2 1 0%;
+        }
+        & .half-td {
+          flex: 0.5 1 0%;
+        }
+        & .action {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          column-gap: 6px;
+          .action-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            padding: 0px;
+            border: none;
+            cursor: pointer;
+            &:disabled {
+              cursor: default;
+            }
+          }
+        }
+      }
+    }
+    .no-data {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+    }
+    .pagination {
+      margin-top: 16px;
+      display: flex;
+      width: 100%;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+  }
+}

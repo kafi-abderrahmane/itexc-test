@@ -1,0 +1,12 @@
+@import "@/assets/styles/variables.scss";
+
+.drawer-patient {
+  .drawer-container {
+    width: 100%;
+    padding: 16px;
+    @media (min-width: 640px) {
+      // sm breakpoint
+      width: 499px;
+    }
+  }
+}

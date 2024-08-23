@@ -64,4 +64,19 @@
       }
     }
   }
+  .home-history {
+    margin-top: 16px;
+    border: 1px solid #dfe8f6;
+    border-radius: 8px;
+    padding: 16px;
+    .title {
+      p {
+        color: $primary;
+        font: {
+          weight: 600;
+          size: 20px;
+        }
+      }
+    }
+  }
 }

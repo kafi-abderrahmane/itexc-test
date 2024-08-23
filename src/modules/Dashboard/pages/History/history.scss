@@ -1,0 +1,29 @@
+@import "@/assets/styles/variables.scss";
+
+.history-page {
+  .title-history {
+    display: none;
+    flex-direction: row;
+    column-gap: 22px;
+    align-items: center;
+    margin-bottom: 25px;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+    h1 {
+      color: $primary;
+      font-weight: 600;
+      margin: 12px 0;
+      font-size: 16px;
+      @media (min-width: 640px) {
+        font-size: 20px;
+      }
+      @media (min-width: 768px) {
+        font-size: 24px;
+      }
+      @media (min-width: 1024px) {
+        font-size: 32px;
+      }
+    }
+  }
+}

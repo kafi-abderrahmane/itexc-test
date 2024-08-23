@@ -4,6 +4,7 @@ import titleIcon from "@/assets/icon/signupIcon.svg";
 
 import VisitsThisMouthGraph from "../../components/HomePage/VisitsThisMouthGraph";
 import Calender from "../../components/HomePage/Calender";
+import TableHistoty from "../../components/History/Table";
 
 import "./homepage.scss";
 
@@ -23,6 +24,12 @@ const HomePage: React.FC = () => {
             <Calender />
           </div>
         </div>
+      </div>
+      <div className="home-history">
+        <div className="title">
+          <p>Medical History</p>
+        </div>
+        <TableHistoty />
       </div>
     </div>
   );

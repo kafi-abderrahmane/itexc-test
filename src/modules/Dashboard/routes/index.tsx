@@ -7,7 +7,8 @@ import React, { lazy } from "react";
 const MainLayout = Loadable(lazy(() => import("../layouts/MainLayout")));
 
 //pages
-const HomePage = Loadable(lazy(() => import("../pages/HomePage/")));
+const HomePage = Loadable(lazy(() => import("../pages/HomePage")));
+const HistoryPage = Loadable(lazy(() => import("../pages/History")));
 
 type RenderElementType = {
   element: React.ReactNode | null;
@@ -74,7 +75,7 @@ export const dashboardRoutes = [
         index: true,
         title: "history",
         element: renderElement({
-          element: <div>history</div>,
+          element: <HistoryPage />,
           permissions: [],
         }),
       },
