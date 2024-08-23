@@ -3,10 +3,222 @@
 .drawer-patient {
   .drawer-container {
     width: 320px;
-    padding: 16px;
     @media (min-width: 640px) {
       // sm breakpoint
       width: 499px;
+    }
+    .title-history {
+      display: flex;
+      flex-direction: row;
+      column-gap: 22px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0px 16px 0px 16px;
+      border-bottom: 1px solid #c5d0e6;
+      @media (min-width: 640px) {
+        // sm breakpoint
+        padding: 0px 28px 0px 28px;
+      }
+      h1 {
+        color: $primary;
+        font-weight: 600;
+        margin: 12px 0;
+        font-size: 16px;
+        @media (min-width: 640px) {
+          font-size: 20px;
+        }
+        @media (min-width: 768px) {
+          font-size: 24px;
+        }
+      }
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        padding: 0px;
+        border: none;
+        cursor: pointer;
+        &:disabled {
+          cursor: default;
+        }
+      }
+    }
+    .patient-detail {
+      margin-top: 28px;
+      padding: 0px 16px 0px 16px;
+      @media (min-width: 640px) {
+        // sm breakpoint
+        padding: 0px 28px 0px 28px;
+      }
+      .title {
+        color: $primary;
+        font: {
+          size: 12px;
+          weight: 500;
+        }
+      }
+      .patient {
+        display: flex;
+        flex-direction: row;
+        column-gap: 8px;
+        align-items: center;
+        justify-content: flex-start;
+        .patient-img {
+          width: 47px;
+          height: 47px;
+          border-radius: 9999px;
+        }
+        .fullname {
+          p {
+            margin: 0px;
+            color: $primary;
+            font: {
+              size: 14px;
+              weight: 500;
+            }
+          }
+          span {
+            margin-top: 5px;
+            color: #c5d0e6;
+            font: {
+              size: 12px;
+              weight: 500;
+            }
+          }
+        }
+      }
+    }
+    .patient-payment-detail {
+      margin-top: 28px;
+      padding: 0px 16px 0px 16px;
+
+      @media (min-width: 640px) {
+        // sm breakpoint
+        padding: 0px 28px 0px 28px;
+      }
+      .title {
+        color: $primary;
+        font: {
+          size: 12px;
+          weight: 500;
+        }
+      }
+      .grid-payment {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        p {
+          color: #848fac;
+          font: {
+            size: 16px;
+            weight: 400;
+          }
+          text-transform: capitalize;
+        }
+        span {
+          color: $primary;
+          font: {
+            size: 14px;
+            weight: 500;
+          }
+          text-transform: capitalize;
+        }
+        .status {
+          padding: 10px 16px 10px 16px;
+          border-radius: 4px;
+          width: min-content;
+        }
+      }
+    }
+    .patient-invoice {
+      margin-top: 28px;
+      padding: 0px 16px 0px 16px;
+
+      @media (min-width: 640px) {
+        // sm breakpoint
+        padding: 0px 28px 0px 28px;
+      }
+      .title {
+        color: $primary;
+        font: {
+          size: 12px;
+          weight: 500;
+        }
+      }
+      .grid-invoice {
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 24px;
+        p {
+          margin: 0;
+          color: #848fac;
+          font: {
+            size: 16px;
+            weight: 400;
+          }
+          text-transform: capitalize;
+        }
+        & .grand-total {
+          color: $primary;
+          font-weight: 600;
+        }
+        span {
+          color: $primary;
+          font: {
+            size: 16px;
+            weight: 500;
+          }
+          text-transform: capitalize;
+          text-align: end;
+        }
+        & .total {
+          color: #52bd94;
+          font: {
+            size: 18px;
+            weight: 500;
+          }
+        }
+        .dash-border {
+          border-bottom: 1px dashed #c5d0e6;
+        }
+      }
+    }
+    .patient-invoice-file {
+      margin-top: 28px;
+      padding: 0px 16px 0px 16px;
+
+      @media (min-width: 640px) {
+        // sm breakpoint
+        padding: 0px 28px 0px 28px;
+      }
+      .title {
+        color: $primary;
+        font: {
+          size: 12px;
+          weight: 500;
+        }
+      }
+      .file-box {
+        cursor: pointer;
+        width: 100%;
+        background-color: transparent;
+        margin-top: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px 12px 16px;
+        border: 1px solid #c5d0e6;
+        border-radius: 8px;
+        .file {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          column-gap: 16px;
+        }
+      }
     }
   }
 }
