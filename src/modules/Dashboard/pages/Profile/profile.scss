@@ -3,4 +3,7 @@
 .profile-page {
   max-width: 1200px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
 }
