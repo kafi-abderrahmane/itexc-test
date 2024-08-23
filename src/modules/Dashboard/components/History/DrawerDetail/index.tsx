@@ -16,7 +16,7 @@ const DrawerDetail: React.FC<DrawerDetailProps> = ({ id, open, onClose }) => {
       onClose={onClose}
       className="drawer-patient"
       anchor="right">
-      <div className="drawer-container"></div>
+      <div className="drawer-container">sdsd</div>
     </Drawer>
   );
 };

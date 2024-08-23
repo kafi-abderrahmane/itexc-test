@@ -5,6 +5,7 @@ import deleteIcon from "@/assets/icon/Delete.svg";
 
 import SkeletonTable from "../../common/SkeletonTable";
 import DrawerDetail from "../DrawerDetail";
+import MobileHistoty from "../Mobile";
 import { Pagination } from "@mui/material";
 
 import { useGetHistoryQuery } from "@/store/apiSlice";
@@ -33,7 +34,7 @@ const TableHistoty: React.FC = () => {
       <div className="table-histoty">
         <div className="table-container">
           {isLoading ? (
-            <div className="w-full">
+            <div>
               <SkeletonTable />
             </div>
           ) : (
@@ -111,9 +112,18 @@ const TableHistoty: React.FC = () => {
               )}
             </>
           )}
-          <div className="pagination">
-            <Pagination count={1} page={currentPage} onChange={handleChange} />
-          </div>
+        </div>
+
+        <div className="mobile-box">
+          <MobileHistoty
+            data={data}
+            error={error}
+            isLoading={isLoading}
+            toggleDrawer={toggleDrawer}
+          />
+        </div>
+        <div className="pagination">
+          <Pagination count={1} page={currentPage} onChange={handleChange} />
         </div>
       </div>
       <DrawerDetail

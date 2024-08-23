@@ -1,9 +1,14 @@
 @import "@/assets/styles/variables.scss";
 
 .table-histoty {
+  display: flex;
+  flex-direction: column;
   .table-container {
+    display: none;
     overflow: auto;
-
+    @media (min-width: 640px) {
+      display: block;
+    }
     table {
       width: 100%;
       min-width: 748px;
@@ -143,12 +148,12 @@
       justify-content: center;
       height: 200px;
     }
-    .pagination {
-      margin-top: 16px;
-      display: flex;
-      width: 100%;
-      align-items: flex-end;
-      justify-content: flex-end;
-    }
+  }
+  .pagination {
+    margin-top: 16px;
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: flex-end;
   }
 }

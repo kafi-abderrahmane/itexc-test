@@ -22,4 +22,6 @@ export interface AppointmentData {
   time: string;
   status: string;
   id: string;
+  total: number;
+  pay_with: string;
 }

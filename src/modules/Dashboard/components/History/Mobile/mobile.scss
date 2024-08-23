@@ -1,0 +1,97 @@
+@import "@/assets/styles/variables.scss";
+
+.mobile-container {
+  overflow: auto;
+  display: block;
+
+  @media (min-width: 640px) {
+    display: none;
+  }
+  .cards {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    .card-patient {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #dfe8f6;
+      border-radius: 8px;
+      padding: 16px;
+      .top-card {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 16px 0px 16px 0px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        .patient {
+          display: flex;
+          flex-direction: row;
+          column-gap: 8px;
+          align-items: center;
+          justify-content: flex-start;
+          .patient-img {
+            width: 47px;
+            height: 47px;
+            border-radius: 9999px;
+          }
+          .fullname {
+            p {
+              margin: 0px;
+              color: $primary;
+              font: {
+                size: 14px;
+                weight: 500;
+              }
+            }
+            span {
+              margin-top: 5px;
+              color: #c5d0e6;
+              font: {
+                size: 12px;
+                weight: 500;
+              }
+            }
+          }
+        }
+        .status {
+          padding: 10px 16px 10px 16px;
+          border-radius: 4px;
+          width: min-content;
+        }
+      }
+      & .selected {
+        background-color: #eff3fa;
+      }
+      .item-card {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        color: $primary;
+        border-radius: 8px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        p {
+          padding: 0px 16px 0px 16px;
+          font: {
+            size: 12px;
+            weight: 500;
+          }
+        }
+      }
+      & .selected {
+        background-color: #eff3fa;
+      }
+    }
+  }
+
+  .no-data {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+  }
+}
