@@ -8,15 +8,17 @@
   .cover-box {
     display: flex;
     height: 134px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     @media (min-width: 748px) {
       height: 246px;
     }
     .cover-img {
-      width: 1200px;
-      height: 134px;
-      @media (min-width: 748px) {
-        height: 246px;
-      }
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: unset;
     }
   }
   .detail-box {

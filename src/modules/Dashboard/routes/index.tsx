@@ -10,6 +10,7 @@ const MainLayout = Loadable(lazy(() => import("../layouts/MainLayout")));
 const HomePage = Loadable(lazy(() => import("../pages/HomePage")));
 const HistoryPage = Loadable(lazy(() => import("../pages/History")));
 const ProfilePage = Loadable(lazy(() => import("../pages/Profile")));
+const EditProfile = Loadable(lazy(() => import("../pages/Profile/Edit")));
 
 type RenderElementType = {
   element: React.ReactNode | null;
@@ -82,12 +83,26 @@ export const dashboardRoutes = [
       },
       {
         path: "profile",
-        index: false,
         title: "profile",
-        element: renderElement({
-          element: <ProfilePage />,
-          permissions: [],
-        }),
+        children: [
+          {
+            title: "profile",
+            element: renderElement({
+              element: <ProfilePage />,
+              permissions: [],
+            }),
+            index: true,
+          },
+          {
+            path: "edit",
+            title: "edit",
+            element: renderElement({
+              element: <EditProfile />,
+              permissions: [],
+            }),
+            index: true,
+          },
+        ],
       },
     ],
   },

@@ -1,0 +1,143 @@
+@import "@/assets/styles/variables.scss";
+
+.edit-profile-display {
+  border-radius: 12px;
+  border: 1px solid #c5d0e6;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 26px 26px 26px 26px;
+  .title-edit {
+    display: flex;
+    flex-direction: column;
+    h1 {
+      color: $primary;
+      font-weight: 600;
+      margin: 0;
+      font-size: 16px;
+      @media (min-width: 640px) {
+        font-size: 20px;
+      }
+      @media (min-width: 768px) {
+        font-size: 24px;
+      }
+    }
+    p {
+      margin: 14px 0;
+      color: #848fac;
+      font: {
+        weight: 400;
+        size: 14px;
+      }
+      @media (min-width: 748px) {
+        font-size: 18px;
+      }
+    }
+  }
+  .cover-box-edit {
+    display: flex;
+    flex-direction: column;
+    height: 134px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 27px auto 0;
+    overflow: hidden;
+    border-radius: 16px;
+    @media (min-width: 748px) {
+      height: 246px;
+    }
+    span {
+      color: $primary;
+      font: {
+        weight: 500;
+        size: 16px;
+      }
+    }
+    .cover-img {
+      margin-top: 12px;
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: fill;
+    }
+  }
+  .profile-picture-box {
+    margin-top: 20px;
+    span {
+      color: $primary;
+      font: {
+        weight: 500;
+        size: 16px;
+      }
+    }
+    .box-profile {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      .profile-img {
+        margin-right: 20px;
+      }
+      .change-button {
+        cursor: pointer;
+        background: #103f74;
+        border-radius: 8px;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font: {
+          weight: 400;
+          size: 12px;
+        }
+      }
+      .remove-button {
+        border-radius: 8px;
+        cursor: pointer;
+        padding: 12px 24px;
+        color: $primary;
+        border: none;
+        background-color: white;
+        font: {
+          weight: 400;
+          size: 12px;
+        }
+      }
+    }
+  }
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    row-gap: 24px;
+    .submit-buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      .save-button {
+        cursor: pointer;
+        background: #103f74;
+        border-radius: 8px;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font: {
+          weight: 400;
+          size: 12px;
+        }
+      }
+      .cancel-button {
+        border-radius: 8px;
+        cursor: pointer;
+        padding: 12px 24px;
+        color: $primary;
+        border: none;
+        background-color: white;
+        font: {
+          weight: 400;
+          size: 12px;
+        }
+      }
+    }
+  }
+}
