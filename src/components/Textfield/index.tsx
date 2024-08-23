@@ -24,7 +24,6 @@ const InTextField_w_Label: React.FC<InTextField_w_LabelProps> = ({
         </InputLabel>
       )}
       <TextField
-        {...rest}
         sx={{
           "& .MuiOutlinedInput-root": {
             borderRadius: "8px",
@@ -37,6 +36,7 @@ const InTextField_w_Label: React.FC<InTextField_w_LabelProps> = ({
             },
           },
         }}
+        {...rest}
       />
     </Stack>
   );
