@@ -5,12 +5,18 @@ import { useNavigate } from "react-router-dom";
 import locationIcon from "@/assets/icon/Location.svg";
 import editIcon from "@/assets/icon/Edit.svg";
 
+import { useSelector } from "react-redux";
+import { useAuth } from "@/contexts/AuthProvider";
+import { RootState } from "@/store";
+
 import coverP from "@/assets/images/cover.png";
 import profileP from "@/assets/images/profile.png";
 import "./profile.scss";
 
 const Profile: React.FC = () => {
   const navigate = useNavigate();
+  const { profile } = useAuth();
+  const user = useSelector((state: RootState) => state.user);
   return (
     <div className="profile-display">
       <div className="cover-box">
@@ -27,8 +33,8 @@ const Profile: React.FC = () => {
         </div>
         <div className="box-info">
           <div className="card-info">
-            <h1>dr. Taylor gomez</h1>
-            <p>Specialist of skin surgery in Moustafa bacha</p>
+            <h1>dr. {profile?.fullname || user?.fullname}</h1>
+            <p>{profile?.speciality}</p>
             <div className="address">
               <img
                 src={locationIcon}
